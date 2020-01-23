@@ -1,1 +1,1 @@
-This project was simply to get started in android studio and to test git configurations to make sure everything was fuctioning properly. This code is directly from a tutorial found online and is not my own work nor do I claim it as such. 
+This project was simply to get started in android studio and to test git configurations to make sure everything was fuctioning properly. This code was created by following along to a tutorial found online and as such, is not my own work nor do I claim it as my own. 
