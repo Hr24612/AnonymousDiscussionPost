@@ -7,6 +7,51 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/oppMinusOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.755"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dividerLine" />
+
+    <EditText
+        android:id="@+id/oppLifeChange"
+        android:layout_width="170dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:hint="Enter Change in Life"
+        android:inputType="textShortMessage|number|textPersonName|textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/oppVariableAdd"
+        app:layout_constraintTop_toBottomOf="@+id/oppMinusOne" />
+
+    <Button
+        android:id="@+id/oppVariableAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.229"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oppPlusOne" />
+
+    <Button
+        android:id="@+id/oppPlusOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.229"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dividerLine" />
+
+    <Button
         android:id="@+id/youPlusOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +97,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/yourLifeTV"
+        android:id="@+id/youLife"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -65,7 +110,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/oppLifeTV"
+        android:id="@+id/oppLife"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -113,6 +158,30 @@
         app:layout_constraintHorizontal_bias="0.355"
         app:layout_constraintStart_toEndOf="@+id/youVariableAdd"
         app:layout_constraintTop_toBottomOf="@+id/youMinusOne" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        app:layout_constraintBottom_toTopOf="@+id/dividerLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
+
+    <Button
+        android:id="@+id/logView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dmg Log"
+        app:layout_constraintBottom_toTopOf="@+id/dividerLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
