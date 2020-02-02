@@ -1,62 +1,107 @@
 package com.example.app.controller;
 
+import com.example.app.exception.UserNotFoundException;
 import com.example.app.model.user;
 import com.example.app.repo.userRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class apiController {
-
     @Autowired
-    userRepo repository;
+    userRepo userRepo;
 
-    @RequestMapping("/save")
-    public String process(){
-        repository.save(new user("Jack", "Smith", "hr24612"));
-        repository.save(new user("Adam", "Johnson", "apple1"));
-        repository.save(new user("Kim", "Smith", "kill2"));
-        repository.save(new user("David", "Williams", "22er"));
-        repository.save(new user("Peter", "Davis","pd2"));
-        return "Done";
+    @GetMapping("/getAllUsers")
+    public List<user> getAllUsers() {
+        return userRepo.findAll();
     }
 
-    @RequestMapping("/findall")
-    public String findAll(){
-        String result = "<html>";
+    @PostMapping("/createUser")
+    public user createUser(@Valid @RequestBody user user) {
+        return userRepo.save(user);
+    }
 
-        for(user cust : repository.findAll()){
-            result += "<div>" + cust.toString() + "</div>";
+    @GetMapping("/getUserByID/{id}")
+    public user getUserByID(@PathVariable(value = "id") Long id) throws UserNotFoundException {
+        return userRepo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @GetMapping("/getUserByUserName/{username}")
+    public user getUserByUserName(@PathVariable(value = "username") String username ) {
+        return userRepo.findByUserName(username);
+    }
+
+    @GetMapping("/userExistByUserName/{username}")
+    public user userExist(@PathVariable(value = "username") String username ) throws UserNotFoundException{
+        if(userRepo.findByUserName(username).equals(userRepo)){
+            throw new UserNotFoundException(username);
+        }
+        else{
+            return userRepo.findByUserName(username);
         }
 
-        return result + "</html>";
     }
 
-    @RequestMapping("/findbyid")
-    public String findById(@RequestParam("id") long id){
-        String result = "";
-        result = repository.findById(id).toString();
-        return result;
+    @GetMapping("/userExistById/{id}")
+    public user userExist(@PathVariable(value = "id") Long id ) throws UserNotFoundException{
+        return userRepo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    @RequestMapping("/findbyusername")
-    public String fetchDataByLastName(@RequestParam("username") String username){
-        String result = "<html>";
+    @PutMapping("/updateUserById/{id}")
+    public user updateUserName(@PathVariable(value = "id") Long id,
+                               @Valid @RequestBody user userDetails) throws UserNotFoundException {
 
-        for(user cust: repository.findByUserName(username)){
-            result += "<div>" + cust.toString() + "</div>";
-        }
+        user user = userRepo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
 
-        return result + "</html>";
+        user.setUserName(userDetails.getUserName());
+        user.setFirstName(userDetails.getFirstName());
+        user.setLastName(userDetails.getLastName());
+
+        user updatedUser = userRepo.save(user);
+
+        return updatedUser;
     }
 
-    @RequestMapping("/deleteAll")
-    public String deleteAll(){
-        repository.deleteAll();
-        return "All deleted";
+    @PutMapping("/updateUserByUserName/{username}")
+    public user updateUserByUserName(@PathVariable(value = "username") String username,
+                                     @Valid @RequestBody user userDetails) {
+
+        user user = userRepo.findByUserName(username);
+
+        user.setUserName(userDetails.getUserName());
+        user.setFirstName(userDetails.getFirstName());
+        user.setLastName(userDetails.getLastName());
+
+        user updatedUser = userRepo.save(user);
+
+        return updatedUser;
     }
 
 
+    @DeleteMapping("/deleteUserWithUserName/{username}")
+    public ResponseEntity<?> deleteUserWithUserName(@PathVariable(value = "username") String username) {
+        user user = userRepo.findByUserName(username);
+
+        userRepo.delete(user);
+
+        return ResponseEntity.ok("Deleted");
+    }
+
+    @DeleteMapping("/deleteUserWithUserId/{id}")
+    public ResponseEntity<?> deleteUserWithUserId(@PathVariable(value = "id") Long id) throws UserNotFoundException {
+        user user = userRepo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+
+        userRepo.delete(user);
+
+        return ResponseEntity.ok("Deleted");
+    }
 }
