@@ -17,21 +17,22 @@ public class MainActivity extends AppCompatActivity {
 
 
         Switch sw = (Switch) findViewById(R.id.darkSwitch);
-        //RelativeLayout lo = (RelativeLayout) findViewById(R.id.relativeLayout);
+        RelativeLayout lo = (RelativeLayout) findViewById(R.id.relativeLayout);
 
-        setOnCLick(sw);//, lo);
+        setOnCLick(sw, lo);
 
     }
-    private void setOnCLick(final Switch sw){//}, final RelativeLayout lo){
+    private void setOnCLick(final Switch sw, final RelativeLayout lo){
         sw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(sw.isChecked()){
-                    sw.setText("ON");
-                   // lo.setBackgroundColor(Color.parseColor("@color/darkMode"));
+                    // sw.setText("ON");
+                    lo.setBackgroundColor(Color.parseColor("@color/darkMode"));
                 }
                 else{
-                    sw.setText("Off"); //  lo.setBackgroundColor(Color.parseColor("@color/lightMode"));
+                    //sw.setText("Off");
+                    lo.setBackgroundColor(Color.parseColor("@color/lightMode"));
                 }
             }
         });
