@@ -6,14 +6,14 @@ import java.util.List;
 
 
 public interface postRepo extends CrudRepository<Post,Long> {
-//    //I have no idea how to actually declare what these do//
-//
-//    //Find posts by a hashtag
-//    List<Post> findByHashtag(String hashtag);
-//
-//    //Sort posts by newest
-//    List<Post> sortByNew();
-//
-//    //Sort posts by highest score
-//    List<Post> sortByHighestScore();
+    //I have no idea how to actually declare what these do
+
+    //TODO: Figure out how to implement find posts by a hashtag
+    List<Post> findByHashtag(String hashtag);
+
+    //TODO: Figure out how to implement sort posts by newest
+   // List<Post> sortByNew();
+
+    //TODO: Figure out how to implement sort posts by highest score
+   // List<Post> sortByHighestScore();
 }

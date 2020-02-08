@@ -6,62 +6,72 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/postApi")
 public class apiControllerPost {
 
-//    @Autowired
-//    postRepo repository;
-//
-//    //Need to figure out a way to not request literally everything to add a post
-//    @PostMapping
-//    public void addPost(@RequestParam String title, String body, String creator, String hashtag, int likes, int dislikes){
-//        Post newPost = new Post(title, body, creator, hashtag,likes,dislikes);
-//        //figure out how to save to repo
-//        //repository.save(newPost);
-//    }
-//
-//    //Need to add functionality to receive posts
-//    @GetMapping
-//    public void getPost(){
-//
-//    }
-//
-//    @GetMapping
-//    public void getAllPost(){
-//
-//    }
-//
-//    //I assume I have to create a get request for sorting by hashtags, new, and score
-//
-//    @GetMapping
-//    public void getPostsByHashtag(@RequestParam("hashtag") String hashtag){
-//        Post allPosts = new Post("","","",hashtag,0,0);
-//
-//        //help
-////        for(Post cust: repository.findByHashtag(hashtag)){
-////            allPosts += cust.toPost();
-////        }
-//    }
-//
-//    @GetMapping
-//    public void getPostByNew(){
-//
-//    }
-//
-//    @GetMapping
-//    public void getPostsByHighestScore(){
-//
-//    }
-//
-//    //Delete a post
-//    @DeleteMapping
-//    public void deletePost(){
-//
-//    }
-//
-//    //Update a post (probably only going to let them update the body of the post?
-//    @PutMapping
-//    public void updatePost(){
-//
-//    }
+    @Autowired
+    postRepo repository;
+
+    //TODO: test this with post man
+    @PostMapping("/createPost")
+    public void addPost(@RequestParam String title, String body, String creator, String hashtag, int likes, int dislikes){
+        Post newPost = new Post(title, body, creator, hashtag,likes,dislikes);
+        repository.save(newPost);
+    }
+
+    //TODO: Need to add functionality to receive posts
+    //TODO: Test with post man
+    @GetMapping("/getPost")
+    public void getPost(){
+
+    }
+    //TODO: Add function to get all posts
+    //TODO: Test with post man
+    @GetMapping("/getAllPosts")
+    public void getAllPosts(){
+
+    }
+
+    //TODO: Add function to get all posts by
+    //TODO: Test with post man
+    @GetMapping("/getPostsByHashtag")
+    public void getPostsByHashtag(@RequestParam("hashtag") String hashtag){
+        Post allPosts = new Post("","","",hashtag,0,0);
+
+        //help
+        for(Post cust: repository.findByHashtag(hashtag)){
+            //allPosts += cust.toPost();
+        }
+    }
+
+    //will NOT be implemented by demo2
+    //TODO: Add function to get posts by new
+    //TODO: Test with post man
+    @GetMapping("/getPostByNew")
+    public void getPostByNew(){
+
+    }
+
+    //will NOT be implemented by demo2
+    //TODO: Add function to get posts by highest score
+    //TODO: Test with post man
+    @GetMapping("/getPostsByHighestScore")
+    public void getPostsByHighestScore(){
+
+    }
+
+    //TODO: Add function to delete a post
+    //TODO: Test with post man
+    @DeleteMapping("/deletePost")
+    public void deletePost(){
+
+    }
+
+    //TODO: Create a function to update a post (probably only going to let them update the body of the post?)
+    //TODO: Test with post man
+    @PutMapping("/updatePost")
+    public void updatePost(){
+
+    }
 
 }
