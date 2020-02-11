@@ -7,6 +7,9 @@ import com.android.volley.RequestQueue;
 //import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+/**
+ * used to control volley requests to the server
+ */
 public class AppController extends Application{
 
     public static final String TAG = AppController.class.getSimpleName();
@@ -22,10 +25,18 @@ public class AppController extends Application{
         mInstance = this;
     }
 
+    /**
+     * returns the instence
+     * @return mInstance
+     */
     public static synchronized AppController getInstance(){
         return mInstance;
     }
 
+    /**
+     * checks if the request queue is empty and if so creates a new one then returns ot
+     * @return mRequestQueue
+     */
     public RequestQueue getRequestQueue(){
         if(mRequestQueue == null){
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -33,17 +44,24 @@ public class AppController extends Application{
         return mRequestQueue;
     }
 
+    /**
+     *  adds new request to the request queue
+     * @param req the request to add
+     * @param tag tag representing request
+     */
     public <T> void addToRequestQueue(Request<T> req, String tag){
         req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
         getRequestQueue().add(req);
     }
 
+    /**
+     * cancels the request with the tag
+     * @param tag tag representing requests to be canceled
+     */
     public void cancelPendingRequests(Object tag){
         if(mRequestQueue != null){
             mRequestQueue.cancelAll(tag);
         }
     }
-
-
 }
 
