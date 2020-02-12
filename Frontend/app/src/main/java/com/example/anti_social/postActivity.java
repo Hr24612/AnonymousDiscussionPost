@@ -46,6 +46,5 @@ public class postActivity extends AppCompatActivity {
         });
 
         Queue.add(strReq);
-        //AppController.getInstance().addToRequestQueue(strReq, "testTag");
     }
 }
