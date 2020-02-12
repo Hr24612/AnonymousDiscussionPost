@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/bodyTextView"
+        android:id="@+id/bodyTV"
         android:layout_width="355dp"
         android:layout_height="176dp"
         android:layout_marginTop="20dp"
@@ -47,7 +47,7 @@
         android:layout_marginTop="20dp"
         android:text="#TAGS"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bodyTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/bodyTV" />
 
     <EditText
         android:id="@+id/commentEditText"
