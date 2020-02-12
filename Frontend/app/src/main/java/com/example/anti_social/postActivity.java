@@ -2,42 +2,48 @@ package com.example.anti_social;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.example.anti_social.app.AppController;
 import com.example.anti_social.net_utils.Const;
 
 
 public class postActivity extends AppCompatActivity {
 
+    public static final String TAG = "TEST";
+    RequestQueue Queue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-        
+
+        final TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
+
 
         StringRequest strReq = new StringRequest(Request.Method.GET, Const.POSTMAN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(AppController.TAG, response.toString());
-                //pDialog.hide();
+                Log.d(TAG, "SERVER RESPONSE: " + response);
 
+                bodyTV.setText(response);
             }
 
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(AppController.TAG, "Error: " + error.getMessage());
-                // pDialog.hide();
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
             }
-
         });
-        AppController.getInstance().addToRequestQueue(strReq, "testTag");
+
+        Queue.add(strReq);
+       // AppController.getInstance().addToRequestQueue(strReq, "testTag");
     }
 }
