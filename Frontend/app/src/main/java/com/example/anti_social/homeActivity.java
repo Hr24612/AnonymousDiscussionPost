@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,6 +21,9 @@ public class homeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         if(getIntent().hasExtra("Mainactivity.name")){
+            RecyclerView postRecyler = (RecyclerView) findViewById(R.id.homePostViewRV);
+            RecyclerView.LayoutManager postLayoutManager = new LinearLayoutManager(this);
+            postRecyler.setLayoutManager(postLayoutManager);
             final TextView testTV = (TextView) findViewById(R.id.testTV);
             RequestQueue queue = Volley.newRequestQueue(homeActivity.this);
             String url ="https://api.myjson.com/bins/11ujto";
