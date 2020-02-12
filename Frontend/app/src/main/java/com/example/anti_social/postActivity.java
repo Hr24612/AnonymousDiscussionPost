@@ -27,7 +27,7 @@ public class postActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         final TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
-        Queue = Volley.newRequestQueue(this);
+        Queue = Volley.newRequestQueue(postActivity.this);
 
         StringRequest strReq = new StringRequest(Request.Method.GET, Const.POSTMAN_URL, new Response.Listener<String>() {
             @Override
@@ -41,6 +41,7 @@ public class postActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                bodyTV.setText(error.getMessage());
             }
         });
 
