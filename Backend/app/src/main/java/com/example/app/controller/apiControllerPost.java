@@ -5,18 +5,20 @@ import com.example.app.repo.postRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @RestController
 @RequestMapping("/postApi")
 public class apiControllerPost {
 
     @Autowired
-    postRepo repository;
+    postRepo postRepo;
 
-    //TODO: test this with post man
+    //Tested with postman, ready for server
     @PostMapping("/createPost")
-    public void addPost(@RequestParam String title, String body, String creator, String hashtag, int likes, int dislikes){
-        Post newPost = new Post(title, body, creator, hashtag,likes,dislikes);
-        repository.save(newPost);
+    public void addPost(@Valid @RequestBody Post post){
+        postRepo.save(post);
     }
 
     //TODO: Need to add functionality to receive posts
@@ -28,8 +30,9 @@ public class apiControllerPost {
     //TODO: Add function to get all posts
     //TODO: Test with post man
     @GetMapping("/getAllPosts")
-    public void getAllPosts(){
+    public List<Post> getAllPosts(){
 
+        return (List<Post>) postRepo.findAll();
     }
 
     //TODO: Add function to get all posts by
@@ -39,7 +42,7 @@ public class apiControllerPost {
         Post allPosts = new Post("","","",hashtag,0,0);
 
         //help
-        for(Post cust: repository.findByHashtag(hashtag)){
+        for(Post cust: postRepo.findByHashtag(hashtag)){
             //allPosts += cust.toPost();
         }
     }

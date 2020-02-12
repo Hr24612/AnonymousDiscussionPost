@@ -8,6 +8,8 @@ import java.util.List;
 public interface postRepo extends CrudRepository<Post,Long> {
     //I have no idea how to actually declare what these do
 
+    //List<Post>
+
     //TODO: Figure out how to implement find posts by a hashtag
     List<Post> findByHashtag(String hashtag);
 
