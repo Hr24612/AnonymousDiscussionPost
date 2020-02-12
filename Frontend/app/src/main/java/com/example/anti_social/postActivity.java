@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.anti_social.net_utils.Const;
 
 
@@ -26,7 +27,7 @@ public class postActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         final TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
-
+        Queue = Volley.newRequestQueue(this);
 
         StringRequest strReq = new StringRequest(Request.Method.GET, Const.POSTMAN_URL, new Response.Listener<String>() {
             @Override
@@ -44,6 +45,6 @@ public class postActivity extends AppCompatActivity {
         });
 
         Queue.add(strReq);
-       // AppController.getInstance().addToRequestQueue(strReq, "testTag");
+        //AppController.getInstance().addToRequestQueue(strReq, "testTag");
     }
 }
