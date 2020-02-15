@@ -14,7 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.anti_social.app.AppController;
 
@@ -38,16 +38,14 @@ public class homeActivity extends AppCompatActivity {
             postRecyler.setLayoutManager(postLayoutManager);
             AppController controller = new AppController();
             RequestQueue queue = Volley.newRequestQueue(homeActivity.this);
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, "https://api.myjson.com/bins/1ddf34",null,
-                    new Response.Listener<JSONObject>() {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "http://coms-309-sk-4.cs.iastate.edu:8080/postApi/getAllPosts",null,
+                    new Response.Listener<JSONArray>() {
                 @Override
-                public void onResponse(JSONObject response) {
+                public void onResponse(JSONArray response) {
                     try {
-                        JSONArray jsonArray = response.getJSONArray("Posts");
-
-                        for(int i = 0; i < jsonArray.length(); i++){
-                            JSONObject post = jsonArray.getJSONObject(i);
-                            postTitles.add(post.getString("Title"));
+                        for(int i = 0; i < response.length(); i++){
+                            JSONObject post = response.getJSONObject(i);
+                            postTitles.add(post.getString("title"));
                         }
                         initRecyclerView();
                     } catch (JSONException e) {
@@ -62,6 +60,7 @@ public class homeActivity extends AppCompatActivity {
                 });
             queue.add(request);
         }
+
         Button createPostBtn = (Button) findViewById(R.id.createPostBtn);
         createPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
