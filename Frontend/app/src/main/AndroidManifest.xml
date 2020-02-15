@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CreatePost"></activity>
+        <activity android:name=".CreatePostActivity"></activity>
+        <activity android:name=".CreatePost" />
         <activity android:name=".homeActivity" />
         <activity android:name=".postActivity" />
         <activity android:name=".MainActivity">
