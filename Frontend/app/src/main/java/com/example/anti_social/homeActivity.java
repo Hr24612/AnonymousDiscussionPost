@@ -48,7 +48,6 @@ public class homeActivity extends AppCompatActivity {
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject post = jsonArray.getJSONObject(i);
                             postTitles.add(post.getString("Title"));
-                            //Log.d("JSONRetrieved", "Title of Post: " + postTitles.get(i));
                         }
                         initRecyclerView();
                     } catch (JSONException e) {
@@ -62,16 +61,15 @@ public class homeActivity extends AppCompatActivity {
                     }
                 });
             queue.add(request);
-
-            Button createPostBtn = (Button) findViewById(R.id.createPostBtn);
-            createPostBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent createPostIntent = new Intent(getApplicationContext(), CreatePostActivity.class);
-                    startActivity(createPostIntent);
-                }
-            });
         }
+        Button createPostBtn = (Button) findViewById(R.id.createPostBtn);
+        createPostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createPostIntent = new Intent(getApplicationContext(), CreatePostActivity.class);
+                startActivity(createPostIntent);
+            }
+        });
     }
 
     private void initRecyclerView(){
