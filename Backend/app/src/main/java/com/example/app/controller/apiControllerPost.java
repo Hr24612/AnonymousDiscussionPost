@@ -1,27 +1,26 @@
-//package com.example.app.controller;
-//
-//import com.example.app.model.Post;
-//import com.example.app.repo.postRepo;
-//import org.springframework.beans.factory.annotation.Autowired;
-//
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.http.ResponseEntity;
-//import javax.validation.Valid;
-//import java.util.List;
-//
-//@RestController
-//@RequestMapping("/postApi")
-//public class apiControllerPost {
-//
-//    @Autowired
-//    postRepo postRepo;
-//
-//    //Tested with postman, ready for server
-//    @PostMapping("/createPost")
-//    public void addPost(@Valid @RequestBody Post post){
-//        postRepo.save(post);
-//    }
-//
+package com.example.app.controller;
+
+import com.example.app.model.Post;
+import com.example.app.repo.postRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.util.List;
+
+@RestController
+@RequestMapping("/postApi")
+public class apiControllerPost {
+
+    @Autowired
+    postRepo postRepo;
+
+
+    @PostMapping("/createPost")
+    public Post createPost(@Valid @RequestBody Post post){
+        return postRepo.save(post);
+    }
+
 //    //TODO: Need to add functionality to receive post
 //    //TODO: Test with post man
 //    @GetMapping("/getPost")
@@ -30,11 +29,11 @@
 //    }
 //    //TODO: Add function to get all posts
 //    //TODO: Test with post man
-//    @GetMapping("/getAllPosts")
-//    public List<Post> getAllPosts(){
-//        List<Post> allPosts = postRepo.getAll();
-//        return allPosts;
-//    }
+    @GetMapping("/getAllPosts")
+    public List<Post> getAllPosts(){
+        List<Post> allPosts = postRepo.findAll();
+        return allPosts;
+    }
 //
 //    //TODO: Add function to get all posts by
 //    //TODO: Test with post man
@@ -77,5 +76,5 @@
 //    public void updatePost(){
 //
 //    }
-//
-//}
+
+}
