@@ -8,14 +8,15 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -27,39 +28,35 @@ public class CreatePostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
-        Log.d("CreatePostActivity.onCreate()","Creating CreatePostActivity");
+        Log.d("CPActivityStart","Creating CreatePostActivity");
         Button submitPostBtn = (Button) findViewById(R.id.submitPostBtn);
         final EditText postTitleET = (EditText) findViewById(R.id.postTitleET);
         submitPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RequestQueue queue = Volley.newRequestQueue(CreatePostActivity.this);
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, "https://api.myjson.com/bins/1ddf34",null,
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("title", postTitleET.getText().toString());
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,"http://coms-309-sk-4.cs.iastate.edu:8080/postApi/createPost", new JSONObject(params),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-
+                                try {
+                                    VolleyLog.v("Response:%n %s", response.toString(4));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                postTitleET.setText("");
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
+                        VolleyLog.e("Error: ", error.getMessage());
                     }
-                }){
-                    @Override
-                    protected Map<String, String> getParams(){
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Title", postTitleET.getText().toString());
-                        return params;
-                    }
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError{
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Content-Type", "application/x-www-form-urlencoded");
-                        return params;
-                    }
-                };
+                });
                 queue.add(request);
+
+
             }
         });
     }
