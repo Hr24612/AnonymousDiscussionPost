@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.anti_social.net_utils.Const;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ public class CreatePostActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(CreatePostActivity.this);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("title", postTitleET.getText().toString());
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,"http://coms-309-sk-4.cs.iastate.edu:8080/postApi/createPost", new JSONObject(params),
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.CREATEPOST, new JSONObject(params),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
