@@ -15,7 +15,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.anti_social.net_utils.Const;
 
-
+/**
+ * Activity page for post content on the app, displays the title and body of the post as well as user comments
+ * Allows users to create and add new comments to the post
+ */
 public class postActivity extends AppCompatActivity {
 
     public static final String TAG = "TEST";

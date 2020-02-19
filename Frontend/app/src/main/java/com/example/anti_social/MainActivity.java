@@ -8,6 +8,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Initial page for user login button
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
