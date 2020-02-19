@@ -18,11 +18,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> postTitles = new ArrayList<>();
     private Context postListContext;
 
+
+    /**
+     * A method for initializing a new RecyclerViewAdadpter.  An adapter is used for binding the items of a ViewHolder to that ViewHolder.  This specific adapter was made for rendering posts.
+     * @param postTitles This is ArrayList of all the post titles that needed to be rendered
+     * @param postListContext This is the context in which the post titles are being rendered (An example would be an activity).
+     */
     public RecyclerViewAdapter(ArrayList<String> postTitles, Context postListContext) {
         this.postTitles = postTitles;
         this.postListContext = postListContext;
     }
 
+    /**
+     * @param parent This is the target container for all the ViewHolder items listed in onBindViewHolder
+     * @param viewType The type of view we are dealing with
+     * @return Returns the ViewHolder so that it can be rendered.
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,6 +42,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return holder;
     }
 
+    /**
+     * This function is used to generate each individual viewholder in our RecyclerView.  A ViewHolder can be loosely defined as
+     *     each individual item in the RecyclerView.
+     * @param holder This would be the ViewHolder object in which we are adding properties too. The ViewHolder object's specific layout can be found in the layout layout_listitem.xml
+     *         in the layouts folder
+     * @param position The position of this ViewHolder in the RecyclerView, e.g. if 3, than this is the third item down.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
@@ -45,6 +63,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         });
     }
 
+
+    /**
+     * This function returns the number of ViewHolders in this RecyclerView
+     * @return The number of ViewHolders int his RecyclerView
+     */
     @Override
     public int getItemCount() {
         return postTitles.size();
