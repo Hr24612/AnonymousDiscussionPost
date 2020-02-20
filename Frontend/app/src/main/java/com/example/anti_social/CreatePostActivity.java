@@ -23,6 +23,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This activity is intended to be viewed by a user who wants to create a new post
+ * The activity allows the user to enter a title and body for the post and add tags
+ */
 public class CreatePostActivity extends AppCompatActivity {
 
     @Override
