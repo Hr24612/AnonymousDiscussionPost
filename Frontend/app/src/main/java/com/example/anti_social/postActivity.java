@@ -1,7 +1,6 @@
 package com.example.anti_social;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +9,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.anti_social.net_utils.Const;
+
+import org.json.JSONArray;
 
 /**
  * Activity page for post content on the app, displays the title and body of the post as well as user comments
@@ -32,22 +32,19 @@ public class postActivity extends AppCompatActivity {
         final TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
         Queue = Volley.newRequestQueue(postActivity.this);
 
-        StringRequest strReq = new StringRequest(Request.Method.GET, Const.POSTMAN_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "SERVER RESPONSE: " + response);
-
-                bodyTV.setText(response);
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                bodyTV.setText(error.getMessage());
-            }
+        //Change POSTMAN_url to proper url once everything works
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Const.POSTMAN_URL,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //something
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
         });
-
-        Queue.add(strReq);
+        Queue.add(request);
     }
 }

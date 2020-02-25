@@ -62,7 +62,6 @@ public class CreatePostActivity extends AppCompatActivity {
                 });
                 queue.add(request);
 
-
             }
         });
     }
