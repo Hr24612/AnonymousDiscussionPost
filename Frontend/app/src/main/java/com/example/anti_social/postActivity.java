@@ -14,6 +14,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.anti_social.net_utils.Const;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Activity page for post content on the app, displays the title and body of the post as well as user comments
@@ -21,7 +23,7 @@ import org.json.JSONArray;
  */
 public class postActivity extends AppCompatActivity {
 
-    public static final String TAG = "TEST";
+   // public static final String TAG = "TEST";
     RequestQueue Queue;
 
     @Override
@@ -32,12 +34,19 @@ public class postActivity extends AppCompatActivity {
         final TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
         Queue = Volley.newRequestQueue(postActivity.this);
 
-        //Change POSTMAN_url to proper url once everything works
+        //TODO Change POSTMAN_url to proper url once everything works
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Const.POSTMAN_URL,null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        //something
+                        try {
+                            for(int i = 0; i < response.length(); i++){           //TODO potentialy not a loop just go through json array and assign values individualy
+                                JSONObject stuff = response.getJSONObject(i);     //TODO change this to be for proper format for post
+                                bodyTV.setText(stuff.getString("title"));   //TODO this as well
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
