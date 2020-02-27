@@ -35,12 +35,14 @@ public class postActivity extends AppCompatActivity {
             TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
             EditText commentET = (EditText) findViewById(R.id.commentET);
 
-            String jsonString = getIntent().getStringExtra("TEMPNAME"); //TODO chnage key neme and posibly data type IDK
+            String jsonString = getIntent().getStringExtra("TEMPNAME"); //TODO change key name
 
             try {
                 JSONObject post = new JSONObject(jsonString);
 
-                titleTV.setText(post.getString("TITLE")); //TODO change indented space thing, or find  
+                titleTV.setText(post.getString("TITLE"));
+                bodyTV.setText(post.getString("BODY"));
+                tagsTV.setText(post.getString("TAGS"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
