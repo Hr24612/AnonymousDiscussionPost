@@ -1,7 +1,6 @@
 package com.example.anti_social;
 
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +22,6 @@ public class postActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-
        // Queue = Volley.newRequestQueue(postActivity.this);
 
         if(getIntent().hasExtra("TEMPNAME")){  //TODO change name
@@ -31,7 +29,7 @@ public class postActivity extends AppCompatActivity {
             TextView titleTV = (TextView) findViewById(R.id.titleTV);
             TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
             TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
-            EditText commentET = (EditText) findViewById(R.id.commentET);
+            //EditText commentET = (EditText) findViewById(R.id.commentET); //TODO change to recycler view stuff
 
             String jsonString = getIntent().getStringExtra("TEMPNAME"); //TODO change key name
 
@@ -53,9 +51,9 @@ public class postActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            for(int i = 0; i < response.length(); i++){           //TODO potentialy not a loop just go through json array and assign values individualy
-                                JSONObject stuff = response.getJSONObject(i);     //TODO change this to be for proper format for post
-                                bodyTV.setText(stuff.getString("title"));   //TODO this as well
+                            for(int i = 0; i < response.length(); i++){         //TODO potentialy not a loop just go through json array and assign values individualy
+                                JSONObject stuff = response.getJSONObject(i);   //TODO change this to be for proper format for post
+                                bodyTV.setText(stuff.getString("title"));       //TODO this as well
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
