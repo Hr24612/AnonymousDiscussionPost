@@ -6,8 +6,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.RequestQueue;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,8 +15,8 @@ import org.json.JSONObject;
  */
 public class postActivity extends AppCompatActivity {
 
-   // public static final String TAG = "TEST";
-    RequestQueue Queue;
+    // public static final String TAG = "TEST";
+    //RequestQueue Queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
