@@ -1,13 +1,15 @@
 package com.example.anti_social;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Activity page for post content on the app, displays the title and body of the post as well as user comments
@@ -33,10 +35,16 @@ public class postActivity extends AppCompatActivity {
             TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
             EditText commentET = (EditText) findViewById(R.id.commentET);
 
-            Parcelable post[] = getIntent().getParcelableArrayExtra("TEMPNAME"); //TODO chnage key neme and posibly data type IDK
+            String jsonString = getIntent().getStringExtra("TEMPNAME"); //TODO chnage key neme and posibly data type IDK
 
-            titleTV.setText(post[0].toString());
+            try {
+                JSONArray post = new JSONArray(jsonString);
 
+                titleTV.setText(post.toString(1));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         //TODO Rework for comments or as backup if no intent extra
