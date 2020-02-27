@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Activity page for post content on the app, displays the title and body of the post as well as user comments
@@ -38,9 +38,9 @@ public class postActivity extends AppCompatActivity {
             String jsonString = getIntent().getStringExtra("TEMPNAME"); //TODO chnage key neme and posibly data type IDK
 
             try {
-                JSONArray post = new JSONArray(jsonString);
+                JSONObject post = new JSONObject(jsonString);
 
-                titleTV.setText(post.toString(1));
+                titleTV.setText(post.getString("TITLE")); //TODO change indented space thing, or find  
 
             } catch (JSONException e) {
                 e.printStackTrace();
