@@ -25,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class homeActivity extends AppCompatActivity {
-    private ArrayList<String> postTitles = new ArrayList<>();
+    private ArrayList<JSONObject> posts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +44,7 @@ public class homeActivity extends AppCompatActivity {
                 public void onResponse(JSONArray response) {
                     try {
                         for(int i = 0; i < response.length(); i++){
-                            JSONObject post = response.getJSONObject(i);
-                            postTitles.add(post.getString("title"));
+                            posts.add(response.getJSONObject(i));
                         }
                         initRecyclerView();
                     } catch (JSONException e) {
@@ -73,7 +72,7 @@ public class homeActivity extends AppCompatActivity {
 
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.homePostViewRV);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(postTitles, this);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(posts, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

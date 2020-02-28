@@ -11,11 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
-    private ArrayList<String> postTitles = new ArrayList<>();
+    private ArrayList<JSONObject> posts = new ArrayList<>();
     private Context postListContext;
 
 
@@ -24,8 +27,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      * @param postTitles This is ArrayList of all the post titles that needed to be rendered
      * @param postListContext This is the context in which the post titles are being rendered (An example would be an activity).
      */
-    public RecyclerViewAdapter(ArrayList<String> postTitles, Context postListContext) {
-        this.postTitles = postTitles;
+    public RecyclerViewAdapter(ArrayList<JSONObject> posts, Context postListContext) {
+        this.posts = posts;
         this.postListContext = postListContext;
     }
 
@@ -53,7 +56,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        holder.postTitle.setText(postTitles.get(position));
+        try {
+            holder.postTitle.setText(posts.get(position).getString("title"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         holder.listItemWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @Override
     public int getItemCount() {
-        return postTitles.size();
+        return posts.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
