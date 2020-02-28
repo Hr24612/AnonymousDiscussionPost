@@ -67,9 +67,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
-
                 Intent postIntent = new Intent(postListContext.getApplicationContext(), postActivity.class);
-               // postIntent.putExtra("JSONOBJ", posts); //TODO find what value to add as extra
+                postIntent.putExtra("JSONOBJ", posts.get(position).toString()); 
                 postListContext.startActivity(postIntent);
                 Log.d(TAG, "you clicked on item " + position);
             }

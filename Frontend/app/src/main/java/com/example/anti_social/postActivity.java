@@ -1,6 +1,7 @@
 package com.example.anti_social;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,13 +33,14 @@ public class postActivity extends AppCompatActivity {
             //EditText commentET = (EditText) findViewById(R.id.commentET); //TODO change to recycler view stuff
 
             String jsonString = getIntent().getStringExtra("JSONOBJ"); //TODO change key name
+            Log.d("postActivity", "string is " + jsonString);
 
             try {
                 JSONObject post = new JSONObject(jsonString);
 
-                titleTV.setText(post.getString("TITLE"));
-                bodyTV.setText(post.getString("BODY"));
-                tagsTV.setText(post.getString("TAGS"));
+                titleTV.setText(post.getString("title"));
+               // bodyTV.setText(post.getString("BODY"));
+                //tagsTV.setText(post.getString("TAGS"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
