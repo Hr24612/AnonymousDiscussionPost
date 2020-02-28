@@ -1,6 +1,7 @@
 package com.example.anti_social;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
     private ArrayList<JSONObject> posts = new ArrayList<>();
@@ -24,7 +26,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     /**
      * A method for initializing a new RecyclerViewAdadpter.  An adapter is used for binding the items of a ViewHolder to that ViewHolder.  This specific adapter was made for rendering posts.
-     * @param postTitles This is ArrayList of all the post titles that needed to be rendered
+     * @param /postTitles This is ArrayList of all the post titles that needed to be rendered
      * @param postListContext This is the context in which the post titles are being rendered (An example would be an activity).
      */
     public RecyclerViewAdapter(ArrayList<JSONObject> posts, Context postListContext) {
@@ -65,6 +67,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
+
+                Intent postIntent = new Intent(postListContext.getApplicationContext(), postActivity.class);
+               // postIntent.putExtra("JSONOBJ", posts); //TODO find what value to add as extra
+                postListContext.startActivity(postIntent);
                 Log.d(TAG, "you clicked on item " + position);
             }
         });
