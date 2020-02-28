@@ -6,14 +6,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.anti_social.net_utils.Const;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Activity page for post content on the app, displays the title and body of the post as well as user comments
@@ -21,33 +15,58 @@ import com.example.anti_social.net_utils.Const;
  */
 public class postActivity extends AppCompatActivity {
 
-    public static final String TAG = "TEST";
-    RequestQueue Queue;
+    // public static final String TAG = "TEST";
+    //RequestQueue Queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        final TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
-        Queue = Volley.newRequestQueue(postActivity.this);
+       // Queue = Volley.newRequestQueue(postActivity.this);
 
-        StringRequest strReq = new StringRequest(Request.Method.GET, Const.POSTMAN_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "SERVER RESPONSE: " + response);
+        if(getIntent().hasExtra("JSONOBJ")){  //TODO change name
 
-                bodyTV.setText(response);
+            TextView titleTV = (TextView) findViewById(R.id.titleTV);
+            TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
+            TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
+            //EditText commentET = (EditText) findViewById(R.id.commentET); //TODO change to recycler view stuff
+
+            String jsonString = getIntent().getStringExtra("JSONOBJ"); //TODO change key name
+            Log.d("postActivity", "string is " + jsonString);
+
+            try {
+                JSONObject post = new JSONObject(jsonString);
+
+                titleTV.setText(post.getString("title"));
+               // bodyTV.setText(post.getString("BODY"));
+                //tagsTV.setText(post.getString("TAGS"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+        }
 
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                bodyTV.setText(error.getMessage());
-            }
+        //TODO Rework for comments or as backup if no intent extra
+       /* JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Const.POSTMAN_URL,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for(int i = 0; i < response.length(); i++){         //TODO potentialy not a loop just go through json array and assign values individualy
+                                JSONObject stuff = response.getJSONObject(i);   //TODO change this to be for proper format for post
+                                bodyTV.setText(stuff.getString("title"));       //TODO this as well
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
         });
-
-        Queue.add(strReq);
+        Queue.add(request);*/
     }
 }

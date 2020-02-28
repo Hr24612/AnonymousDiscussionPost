@@ -1,6 +1,7 @@
 package com.example.anti_social;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,21 +12,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
-    private ArrayList<String> postTitles = new ArrayList<>();
+    private ArrayList<JSONObject> posts = new ArrayList<>();
     private Context postListContext;
 
 
     /**
      * A method for initializing a new RecyclerViewAdadpter.  An adapter is used for binding the items of a ViewHolder to that ViewHolder.  This specific adapter was made for rendering posts.
-     * @param postTitles This is ArrayList of all the post titles that needed to be rendered
+     * @param /postTitles This is ArrayList of all the post titles that needed to be rendered
      * @param postListContext This is the context in which the post titles are being rendered (An example would be an activity).
      */
-    public RecyclerViewAdapter(ArrayList<String> postTitles, Context postListContext) {
-        this.postTitles = postTitles;
+    public RecyclerViewAdapter(ArrayList<JSONObject> posts, Context postListContext) {
+        this.posts = posts;
         this.postListContext = postListContext;
     }
 
@@ -53,11 +58,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        holder.postTitle.setText(postTitles.get(position));
+        try {
+            holder.postTitle.setText(posts.get(position).getString("title"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         holder.listItemWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Intent postIntent = new Intent(postListContext.getApplicationContext(), postActivity.class);
+                postIntent.putExtra("JSONOBJ", posts.get(position).toString()); 
+                postListContext.startActivity(postIntent);
                 Log.d(TAG, "you clicked on item " + position);
             }
         });
@@ -70,7 +82,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @Override
     public int getItemCount() {
-        return postTitles.size();
+        return posts.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
