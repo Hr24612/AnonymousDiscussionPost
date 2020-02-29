@@ -90,8 +90,8 @@ autoDeploy:
  only: # Will only run if these conditions are met, check documentation for more!
   refs:
   - 10-ci-cd
- variables:
- - $CI_COMMIT_MESSAGE =~ /autodeploy/
+#  variables:
+#  - $CI_COMMIT_MESSAGE =~ /autodeploy/
  script:
  - cd Backend/app
  - mvn package
