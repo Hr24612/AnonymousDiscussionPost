@@ -35,9 +35,9 @@ maven-build:
 autoDeploy:
   stage: autodeploy
   tags:
-   - shell
+   - backend_tag
   script:
-    - cd Spring
+    - cd Backend/app
     - mvn package
     - sudo mv target/*.jar /target/web-demo.jar 
     - sudo systemctl stop systemd-web-demo
