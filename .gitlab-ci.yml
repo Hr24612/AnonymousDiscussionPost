@@ -89,7 +89,6 @@ autoDeploy:
  - backend_tag
  only: # Will only run if these conditions are met, check documentation for more!
  refs:
- - master
  - 10-ci-cd
  variables:
  - $CI_COMMIT_MESSAGE =~ /autodeploy/
