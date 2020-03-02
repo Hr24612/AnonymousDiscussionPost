@@ -25,7 +25,7 @@ public class postActivity extends AppCompatActivity {
 
        // Queue = Volley.newRequestQueue(postActivity.this);
 
-        if(getIntent().hasExtra("postContent")){  
+        if(getIntent().hasExtra("postContent")){
 
             TextView titleTV = (TextView) findViewById(R.id.titleTV);
             TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
@@ -53,7 +53,7 @@ public class postActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            for(int i = 0; i < response.length(); i++){         //TODO potentialy not a loop just go through json array and assign values individualy
+                            for(int i = 0; i < response.length(); i++){         //TODO potential not a loop just go through json array and assign values individually
                                 JSONObject stuff = response.getJSONObject(i);   //TODO change this to be for proper format for post
                                 bodyTV.setText(stuff.getString("title"));       //TODO this as well
                             }
