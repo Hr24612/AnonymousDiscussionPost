@@ -25,21 +25,21 @@ public class postActivity extends AppCompatActivity {
 
        // Queue = Volley.newRequestQueue(postActivity.this);
 
-        if(getIntent().hasExtra("JSONOBJ")){  //TODO change name
+        if(getIntent().hasExtra("postContent")){  
 
             TextView titleTV = (TextView) findViewById(R.id.titleTV);
             TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
             TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
             //EditText commentET = (EditText) findViewById(R.id.commentET); //TODO change to recycler view stuff
 
-            String jsonString = getIntent().getStringExtra("JSONOBJ"); //TODO change key name
+            String jsonString = getIntent().getStringExtra("postContent");
             Log.d("postActivity", "string is " + jsonString);
 
             try {
                 JSONObject post = new JSONObject(jsonString);
 
                 titleTV.setText(post.getString("title"));
-               // bodyTV.setText(post.getString("BODY"));
+                //bodyTV.setText(post.getString("BODY"));
                 //tagsTV.setText(post.getString("TAGS"));
 
             } catch (JSONException e) {

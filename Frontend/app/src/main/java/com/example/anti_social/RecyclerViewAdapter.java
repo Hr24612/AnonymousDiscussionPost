@@ -68,7 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
 
                 Intent postIntent = new Intent(postListContext.getApplicationContext(), postActivity.class);
-                postIntent.putExtra("JSONOBJ", posts.get(position).toString()); 
+                postIntent.putExtra("postContent", posts.get(position).toString());
                 postListContext.startActivity(postIntent);
                 Log.d(TAG, "you clicked on item " + position);
             }
