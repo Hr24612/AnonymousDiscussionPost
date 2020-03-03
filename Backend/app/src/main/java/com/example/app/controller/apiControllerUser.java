@@ -1,49 +1,58 @@
 package com.example.app.controller;
-
 import com.example.app.exception.UserNotFoundException;
 import com.example.app.model.user;
 import com.example.app.repo.userRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * API class for managing users
+ */
+
 @RestController
-@RequestMapping("/api")
-public class apiController {
+@RequestMapping("/api/user")
+public class apiControllerUser {
+
+    //Reference to userRepo interface
     @Autowired
     userRepo userRepo;
 
-    //Tested in post man, working, ready for server
-    @GetMapping("/getAllUsers")
+    //*****************//
+
+    /******************/
+    /**** GET USER ****/
+    /******************/
+
+    //Get all users in DB
+    @GetMapping("/users")
     public List<user> getAllUsers() {
         return userRepo.findAll();
     }
 
-    //Tested in post man, working, ready for server
-    @PostMapping("/createUser")
-    public user createUser(@Valid @RequestBody user user) {
-        return userRepo.save(user);
-    }
-
-    //Tested in post man, working, ready for server
+    //Get user by userId
     @GetMapping("/getUserByID/{id}")
     public user getUserByID(@PathVariable(value = "id") Long id) throws UserNotFoundException {
         return userRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    //Tested in post man, working, ready for server
+    //Get user by userName
     @GetMapping("/getUserByUserName/{username}")
     public user getUserByUserName(@PathVariable(value = "username") String username ) {
         return userRepo.findByUserName(username);
     }
 
-    //Tested in post man, I think it's working? Not sure what it's supposed to do, if it's
-    //supposed to error out when a non-existant username is given then it is working just fine
+    //Check if user exists with userId
+    @GetMapping("/userExistById/{id}")
+    public user userExist(@PathVariable(value = "id") Long id ) throws UserNotFoundException{
+        return userRepo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    //Check if user exists by userName
     @GetMapping("/userExistByUserName/{username}")
     public user userExist(@PathVariable(value = "username") String username ) throws UserNotFoundException{
         if(userRepo.findByUserName(username).equals(userRepo)){
@@ -52,16 +61,35 @@ public class apiController {
         else{
             return userRepo.findByUserName(username);
         }
+    }
 
+    /******************/
+    /** END GET USER **/
+    /******************/
+
+    //*****************//
+
+    /*******************/
+    /**** POST USER ****/
+    /*******************/
+
+    //Create user
+    @PostMapping("/createUser")
+    public user createUser(@Valid @RequestBody user user) {
+        return userRepo.save(user);
     }
-    //Tested in post man, I think it's working? Not sure what it's supposed to do, if it's
-    //supposed to error out when a non-existant id is given then it is working just fine
-    @GetMapping("/userExistById/{id}")
-    public user userExist(@PathVariable(value = "id") Long id ) throws UserNotFoundException{
-        return userRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
-    }
-    //Test in postman, working, ready for server
+
+    /*******************/
+    /** END POST USER **/
+    /*******************/
+
+    //*****************//
+
+    /******************/
+    /**** PUT USER ****/
+    /******************/
+
+    //Update user with userId
     @PutMapping("/updateUserById/{id}")
     public user updateUserName(@PathVariable(value = "id") Long id,
                                @Valid @RequestBody user userDetails) throws UserNotFoundException {
@@ -78,7 +106,7 @@ public class apiController {
         return updatedUser;
     }
 
-    //Test in postman, working, ready for server
+    //Update user with userName
     @PutMapping("/updateUserByUserName/{username}")
     public user updateUserByUserName(@PathVariable(value = "username") String username,
                                      @Valid @RequestBody user userDetails) {
@@ -94,7 +122,17 @@ public class apiController {
         return updatedUser;
     }
 
-    //Test in postman, working, ready for server
+    /*******************/
+    /** END PUT USER **/
+    /*******************/
+
+    //*****************//
+
+    /*****************/
+    /** DELETE USER **/
+    /*****************/
+
+    //Delete user with userName
     @DeleteMapping("/deleteUserWithUserName/{username}")
     public ResponseEntity<?> deleteUserWithUserName(@PathVariable(value = "username") String username) {
         user user = userRepo.findByUserName(username);
@@ -103,7 +141,8 @@ public class apiController {
 
         return ResponseEntity.ok("Deleted");
     }
-    //Test in postman, working, ready for server
+
+    //Delete user with userId
     @DeleteMapping("/deleteUserWithUserId/{id}")
     public ResponseEntity<?> deleteUserWithUserId(@PathVariable(value = "id") Long id) throws UserNotFoundException {
         user user = userRepo.findById(id)
@@ -113,4 +152,10 @@ public class apiController {
 
         return ResponseEntity.ok("Deleted");
     }
+
+    /*********************/
+    /** END DELETE USER **/
+    /*********************/
+
+    //*****************//
 }

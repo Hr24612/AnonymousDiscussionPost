@@ -1,28 +1,36 @@
 package com.example.app.model;
-
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
+/**
+ * Class that represents a user
+ */
+
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @EntityListeners(AuditingEntityListener.class)
 public class user implements Serializable {
+
+    //DB column to save user id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //DB column to save user's firstName
     @NotBlank
     private String firstName;
 
+    //DB column to save user's lastName
     @NotBlank
     private String lastName;
 
+    //DB column to save user's userName
     @NotBlank
     private String userName;
 
+    //Constructor to initialize DB columns
     public user(Long id, String firstName, String lastName, String userName) {
         this.id = id;
         this.firstName = firstName;
@@ -30,39 +38,28 @@ public class user implements Serializable {
         this.userName = userName;
     }
 
-    public user(){
+    //Empty constructor to help with GET requests
+    public user(){ }
 
-    }
+    //*****************//
 
-    public Long getId() {
-        return id;
-    }
+    /*************************/
+    /** Getters and Setters **/
+    /*************************/
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getUserName() { return userName; }
+    public void setUserName(String userName) { this.userName = userName; }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    /*****************************/
+    /** END Getters and Setters **/
+    /*****************************/
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    //*****************//
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }
