@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.anti_social.comparators.JSONObjectDateCompare;
 import com.example.anti_social.net_utils.Const;
 
 import org.json.JSONArray;
@@ -24,7 +25,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class homeActivity extends AppCompatActivity {
     private ArrayList<JSONObject> posts = new ArrayList<>();
@@ -78,27 +78,5 @@ public class homeActivity extends AppCompatActivity {
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(posts, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    /**
-     * A class to be used to help sort the array of posts served to the end user.
-     */
-    private class JSONObjectDateCompare implements Comparator<JSONObject> {
-        @Override
-        public int compare(JSONObject first, JSONObject second){
-            int firstDate = 0, secondDate = 0;
-            try {
-                firstDate = first.getInt("date");
-                secondDate = second.getInt("date");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            if(firstDate == secondDate){
-                return 0;
-            }
-            else{
-                return (firstDate > secondDate) ? 1 : -1;
-            }
-        }
     }
 }
