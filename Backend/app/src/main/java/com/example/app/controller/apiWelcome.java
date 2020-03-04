@@ -15,6 +15,6 @@ public class apiWelcome {
     //Welcome message
     @GetMapping
     public String welcome() {
-        return "Welcome to Anti Social Social App API";
+        return "PIPLEINE TEST";//Welcome to Anti Social Social App API";
     }
 }
