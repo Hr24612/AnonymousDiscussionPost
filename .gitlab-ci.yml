@@ -28,20 +28,20 @@ maven-test:
     - mvn test
   artifacts:
     paths:
-      - Backend/target/*.jar
+      - Backend/app/target/*.jar
 # Below stage builds, deploys and executes the jar as service.
 # Make sure there is /target directory in your server, else script will fail, or use any other folder you like.
 # If you are changing the folder, reflect the change in systemd-web-demo service too.
-# autoDeploy:
-#   stage: autodeploy
-#   tags:
-#    - backend_tag
-#   script:
-#     - cd Backend/app
-#     - mvn package
-#     - sudo mv target/*.jar /target/web-demo.jar 
-#     - sudo systemctl stop system-web-demo
-#     - sudo systemctl start system-web-demo
+autoDeploy:
+  stage: autodeploy
+  tags:
+   - backend_tag
+  script:
+    - cd Backend/app
+    - mvn package
+    - sudo mv target/*.jar /target/web-demo.jar 
+    - sudo systemctl stop system-web-demo
+    - sudo systemctl start system-web-demo
 
     
 # To build android projects
@@ -83,20 +83,20 @@ maven-test:
 #to your yml file which will only run certain stages on a certain branch. You can also
 #add conditions to detect a certain commit message to skip/run specific stages in
 #your pipeline.
-autoDeploy:
- stage: autodeploy
- tags:
- - backend_tag
- only: # Will only run if these conditions are met, check documentation for more!
-  refs:
-  - 10-ci-cd
-  - master
-  - Demo3
-#  variables:
-#  - $CI_COMMIT_MESSAGE =~ /autodeploy/
- script:
- - cd Backend/app
- - mvn package
- - sudo mv target/*.jar /target/web-demo.jar
- - sudo systemctl stop system-web-demo
- - sudo systemctl start system-web-demo
+# autoDeploy:
+#  stage: autodeploy
+#  tags:
+#  - backend_tag
+#  only: # Will only run if these conditions are met, check documentation for more!
+#   refs:
+#   - 10-ci-cd
+#   - master
+#   - Demo3
+# #  variables:
+# #  - $CI_COMMIT_MESSAGE =~ /autodeploy/
+#  script:
+#  - cd Backend/app
+#  - mvn package
+#  - sudo mv target/*.jar /target/web-demo.jar
+#  - sudo systemctl stop system-web-demo
+#  - sudo systemctl start system-web-demo
