@@ -24,6 +24,9 @@ public class post extends audit {
     @NotBlank
     private String hashTag;
 
+    @NotBlank
+    private String title;
+
     //DB column to save post's body
     @NotBlank
     @Lob
@@ -37,9 +40,10 @@ public class post extends audit {
     private user user;
 
     //Constructor1 to initialize DB columns
-    public post(Long id, String hashTag, String body, user user){
+    public post(Long id, String hashTag, String body, String title, user user){
         this.id = id;
         this.hashTag = hashTag;
+        this.title = title;
         this.body = body;
         this.user = user;
     }
@@ -57,6 +61,8 @@ public class post extends audit {
     public void setId(Long id) {this.id = id;}
     public String getHashTag() {return hashTag;}
     public void setHashTag(String hashTag) {this.hashTag = hashTag; }
+    public String getTitle() {return title;}
+    public void setTitle(String title){this.title = title;}
     public String getBody() {return body;}
     public void setBody(String body) {this.body = body; }
     public user getUser() { return user; }

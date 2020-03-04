@@ -32,7 +32,13 @@ public class apiControllerPost {
     /**** GET POSTS ****/
     /*******************/
 
-    //Get all posts
+    //Get all posts from
+    @GetMapping("/getAllPosts")
+    public List<post> getPosts(){
+        return postRepo.findAll();
+    }
+
+    //Get all posts from specific user
     @GetMapping("/{userId}/posts")
     public List<post> getAllPosts(@PathVariable (value = "userId") Long userId){
         return postRepo.findByUserId(userId);
