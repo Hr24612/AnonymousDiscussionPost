@@ -17,12 +17,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
     private ArrayList<JSONObject> posts = new ArrayList<>();
     private Context postListContext;
-
 
     /**
      * A method for initializing a new RecyclerViewAdadpter.  An adapter is used for binding the items of a ViewHolder to that ViewHolder.  This specific adapter was made for rendering posts.
@@ -74,7 +72,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
     }
-
 
     /**
      * This function returns the number of ViewHolders in this RecyclerView
