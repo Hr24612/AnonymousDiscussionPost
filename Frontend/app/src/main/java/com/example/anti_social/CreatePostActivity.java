@@ -37,12 +37,18 @@ public class CreatePostActivity extends AppCompatActivity {
         Log.d("CPActivityStart","Creating CreatePostActivity");
         Button submitPostBtn = (Button) findViewById(R.id.submitPostBtn);
         final EditText postTitleET = (EditText) findViewById(R.id.postTitleET);
+        final EditText bodyET = (EditText) findViewById(R.id.bodyET);
+        final EditText tagsET = (EditText) findViewById(R.id.tagsET);
+
         submitPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RequestQueue queue = Volley.newRequestQueue(CreatePostActivity.this);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("title", postTitleET.getText().toString());
+                params.put("body", bodyET.getText().toString());
+                params.put("hashTag", tagsET.getText().toString());
+                
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.CREATEPOST, new JSONObject(params),
                         new Response.Listener<JSONObject>() {
                             @Override
