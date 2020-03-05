@@ -24,7 +24,7 @@
         android:id="@+id/upvotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="0"/>
 
     <TextView
         android:id="@+id/hashtagTV"
@@ -33,9 +33,9 @@
         android:layout_below="@+id/postTitle"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="219dp"
-        android:layout_marginRight="219dp"
-        android:text="TextView" />
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="259dp"
+        android:layout_marginRight="259dp"
+        android:text="" />
 
 </RelativeLayout>
