@@ -15,7 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.anti_social.app.AppController;
 import com.example.anti_social.net_utils.Const;
 
 import org.json.JSONArray;
@@ -37,7 +37,7 @@ public class homeActivity extends AppCompatActivity {
             RecyclerView.LayoutManager postLayoutManager = new LinearLayoutManager(this);
             postRecyler.setLayoutManager(postLayoutManager);
             //AppController controller = new AppController();
-            RequestQueue queue = Volley.newRequestQueue(homeActivity.this);
+            RequestQueue queue = AppController.getInstance().getRequestQueue();
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Const.GETALLPOSTS,null,
                     new Response.Listener<JSONArray>() {
                 @Override
