@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button loginBtn = (Button) findViewById(R.id.loginBtn);
-        Button createUserBtn = (Button) findViewById(R.id.createUserBTN);
+        Button createUserBtn = (Button) findViewById(R.id.createNewUserBtn);
         TextView userFoundTV = (TextView) findViewById(R.id.userNotFoundTV);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
