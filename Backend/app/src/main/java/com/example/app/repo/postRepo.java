@@ -1,27 +1,20 @@
 package com.example.app.repo;
-
-import com.example.app.model.Post;
+import com.example.app.model.post;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
+
+/**
+ * Post repository interface that allows the API to communicate with the post table in the DB
+ */
 
 @Repository
-public interface postRepo extends JpaRepository<Post,Long> {
-    //I have no idea how to actually declare what these do
+public interface postRepo extends JpaRepository<post,Long> {
 
-   // List<Post>
+    //Find a list of posts for a user with userId
+    List<post> findByUserId(Long userId);
 
-//    @Query(value = "SELECT * FROM post", nativeQuery = true)
-//    public List<Post> getAll();
-
-    //TODO: Figure out how to implement find posts by a hashtag
-    //List<Post> findByHashtag(String hashtag);
-
-    //TODO: Figure out how to implement sort posts by newest
-   // List<Post> sortByNew();
-
-    //TODO: Figure out how to implement sort posts by highest score
-   // List<Post> sortByHighestScore();
+    //Find a post with userId and postId
+    Optional<post> findByIdAndUserId(Long id, Long userId);
 }
