@@ -13,8 +13,8 @@ public class JSONObjectDateCompare implements Comparator<JSONObject> {
     public int compare(JSONObject first, JSONObject second){
         int firstDate = 0, secondDate = 0;
         try {
-            firstDate = first.getInt("date");
-            secondDate = second.getInt("date");
+            firstDate = first.getInt("updatedAt");
+            secondDate = second.getInt("updatedAt");
         } catch (JSONException e) {
             e.printStackTrace();
         }
