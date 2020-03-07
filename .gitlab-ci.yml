@@ -46,6 +46,7 @@ autoDeploy:
   - 10-ci-cd
   - master
   - Demo3
+  - 18-cicd-for-frontend
 #  variables:
 #  - $CI_COMMIT_MESSAGE =~ /autodeploy/
  script:
