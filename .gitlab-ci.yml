@@ -60,8 +60,8 @@ android-build:
  - cd Android_test
  - ./gradlew assemble
  artifacts:
- paths:
- - Frontend/app/build/outputs/
+ #paths:
+ #- Frontend/app/build/outputs/
     
 # To run Android unit tests.   
  unitTests:
