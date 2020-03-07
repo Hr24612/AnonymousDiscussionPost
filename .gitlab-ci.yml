@@ -67,7 +67,7 @@ android-build:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/gradlew
   tags:
-    - android_tag1
+    - android_tag
   script:
     - cd Frontend
     - ./gradlew assemble
@@ -75,7 +75,7 @@ android-build:
     paths:
     - Frontend/app/build/outputs/
     
-# To run Android unit tests.   
+# To run Android unit tests.
 unitTests:
   image: javiersantos/android-ci:latest
   stage: androidtest
@@ -83,7 +83,7 @@ unitTests:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/gradlew
   tags:
-    - android_tag1
+    - android_tag
   script:
     - cd Frontend
     - ./gradlew test
