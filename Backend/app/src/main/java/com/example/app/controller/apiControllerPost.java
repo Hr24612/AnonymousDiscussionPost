@@ -24,7 +24,7 @@ public class apiControllerPost {
 
     //Reference to postRepo interface
     @Autowired
-    userRepo userRepo;
+     userRepo userRepo;
 
     //*****************//
 
