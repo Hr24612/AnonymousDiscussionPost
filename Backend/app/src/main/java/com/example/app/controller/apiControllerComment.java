@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/post")
-public class apiControllerComment {   
+public class apiControllerComment {    
 
     //Reference to commentRepo interface
     @Autowired
