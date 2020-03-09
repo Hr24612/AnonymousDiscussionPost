@@ -32,7 +32,7 @@ public class homeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        if(getIntent().hasExtra("Mainactivity.name")){
+        if(getIntent().hasExtra("Mainactivity.id")){
             RecyclerView postRecyler = (RecyclerView) findViewById(R.id.homePostViewRV);
             RecyclerView.LayoutManager postLayoutManager = new LinearLayoutManager(this);
             postRecyler.setLayoutManager(postLayoutManager);
