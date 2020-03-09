@@ -72,6 +72,26 @@ class AppApplicationTests {
 		assertEquals(2,list.size());
 
 	}
+
+	@Test
+	public void createPostTest(){
+		int id1 = 1;
+		int id2 = 2;
+		Long id1long = Long.valueOf(id1);
+		Long id2long = Long.valueOf(id2);
+		user testUser = new user(id1long, "test", "test", "test");
+
+		List<post> list = new ArrayList<post>();
+
+		post testPost = new post(id1long, "test", "test","test",testUser);
+
+		list.add(testPost);
+
+		when(repo.findByUserId(id1long)).thenReturn(list);
+
+		assertEquals(1, list.size());
+	}
+
 	@Test
 	void contextLoads() {
 	}
