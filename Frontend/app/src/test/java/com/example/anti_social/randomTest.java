@@ -16,7 +16,7 @@ public class randomTest {
     @Mock
     JSONObject fakePost;
 
-    @Mock
+    //@Spy
     postActivity p;
 
     @Test
