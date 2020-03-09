@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 EditText nameET = (EditText) findViewById(R.id.nameEditText);
                 final int[] found = {0};
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-                
+
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Const.getUserByName(nameET.getText().toString()),null,
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     nameET.setText("");
                 }
                 else{
-
+                    //TODO add user not found text
                 }
             }
         });
