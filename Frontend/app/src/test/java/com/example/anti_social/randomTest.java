@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -21,6 +21,7 @@ public class randomTest {
 
     @Test
     public void testLogin() throws JSONException {
+
         when(fakePost.getString("title")).thenReturn("Fake Title");
         when(fakePost.getString("body")).thenReturn("According to all known laws of aviation");
         when(fakePost.getString("hashTag")).thenReturn("stuff");
