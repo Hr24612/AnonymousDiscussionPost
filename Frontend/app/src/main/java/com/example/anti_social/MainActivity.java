@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 /**
  * Initial page for user login button
  */
@@ -22,10 +25,15 @@ public class MainActivity extends AppCompatActivity {
         Button createUserBtn = (Button) findViewById(R.id.createNewUserBtn);
         TextView userFoundTV = (TextView) findViewById(R.id.userNotFoundTV);
 
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //TODO check if user exists
                 EditText nameET = (EditText) findViewById(R.id.nameEditText);
+
+                //JsonRequest request = ;
+
                 Intent homePageIntent = new Intent(getApplicationContext(),homeActivity.class);
                 homePageIntent.putExtra("Mainactivity.name", nameET.getText().toString());
                 startActivity(homePageIntent);
