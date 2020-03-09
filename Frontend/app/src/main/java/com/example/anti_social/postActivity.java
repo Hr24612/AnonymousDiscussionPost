@@ -15,6 +15,7 @@ import org.json.JSONObject;
  */
 public class postActivity extends AppCompatActivity {
 
+
     // public static final String TAG = "TEST";
     //RequestQueue Queue;
 
@@ -38,9 +39,7 @@ public class postActivity extends AppCompatActivity {
             try {
                 JSONObject post = new JSONObject(jsonString);
 
-                titleTV.setText(post.getString("title"));
-                //bodyTV.setText(post.getString("BODY"));
-                //tagsTV.setText(post.getString("TAGS"));
+               fillPostContent(post);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -69,4 +68,33 @@ public class postActivity extends AppCompatActivity {
         });
         Queue.add(request);*/
     }
+
+    public void fillPostContent(JSONObject post) throws JSONException {
+
+        TextView titleTV = (TextView) findViewById(R.id.titleTV);
+        TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
+        TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
+
+        titleTV.setText(post.getString("title"));
+        bodyTV.setText(post.getString("BODY"));
+        tagsTV.setText(post.getString("TAGS"));
+    }
+
+    public String getPostTitle(){
+        TextView titleTV = (TextView) findViewById(R.id.titleTV);
+        return titleTV.getText().toString();
+
+    }
+
+    public String getPostBody(){
+        TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
+        return bodyTV.getText().toString();
+
+    }
+    public String getPostTag(){
+        TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
+        return tagsTV.getText().toString();
+
+    }
+
 }

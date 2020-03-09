@@ -48,7 +48,7 @@ public class CreatePostActivity extends AppCompatActivity {
                 params.put("title", postTitleET.getText().toString());
                 params.put("body", bodyET.getText().toString());
                 params.put("hashTag", tagsET.getText().toString());
-                
+
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.CREATEPOST, new JSONObject(params),
                         new Response.Listener<JSONObject>() {
                             @Override
