@@ -89,32 +89,4 @@ public class postActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void fillPostContent(JSONObject post) throws JSONException {
-
-        TextView titleTV = (TextView) findViewById(R.id.titleTV);
-        TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
-        TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
-
-        titleTV.setText(post.getString("title"));
-        bodyTV.setText(post.getString("BODY"));
-        tagsTV.setText(post.getString("TAGS"));
-    }
-
-    public String getPostTitle(){
-        TextView titleTV = (TextView) findViewById(R.id.titleTV);
-        return titleTV.getText().toString();
-
-    }
-
-    public String getPostBody(){
-        TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
-        return bodyTV.getText().toString();
-
-    }
-    public String getPostTag(){
-        TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
-        return tagsTV.getText().toString();
-
-    }
-
 }
