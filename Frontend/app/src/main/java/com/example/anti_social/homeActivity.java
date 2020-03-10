@@ -28,13 +28,14 @@ import java.util.Collections;
 
 public class homeActivity extends AppCompatActivity {
     private ArrayList<JSONObject> posts = new ArrayList<>();
-
+    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        if(getIntent().hasExtra("Mainactivity.name")){
+        if(getIntent().hasExtra("Mainactivity.id")){
+            userId = getIntent().getStringExtra("Mainactivity.id");
             RecyclerView postRecyler = (RecyclerView) findViewById(R.id.homePostViewRV);
             RecyclerView.LayoutManager postLayoutManager = new LinearLayoutManager(this);
             postRecyler.setLayoutManager(postLayoutManager);
@@ -48,8 +49,7 @@ public class homeActivity extends AppCompatActivity {
                         for(int i = 0; i < response.length(); i++){
                             posts.add(response.getJSONObject(i));
                         }
-                        Collections.sort(posts, new JSONObjectDateCompare());
-                        initRecyclerView();
+                        initRecyclerView(getIntent().getStringExtra("Mainactivity.id"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -68,14 +68,15 @@ public class homeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent createPostIntent = new Intent(getApplicationContext(), CreatePostActivity.class);
+                createPostIntent.putExtra("userId", userId);
                 startActivity(createPostIntent);
             }
         });
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView(String userId){
         RecyclerView recyclerView = findViewById(R.id.homePostViewRV);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(posts, this);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(posts, this, userId);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

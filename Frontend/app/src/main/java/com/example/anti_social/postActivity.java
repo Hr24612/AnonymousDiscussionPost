@@ -52,6 +52,8 @@ public class postActivity extends AppCompatActivity {
             try {
                 JSONObject post = new JSONObject(jsonString);
                 titleTV.setText(post.getString("title"));
+                bodyTV.setText(post.getString("body"));
+                tagsTV.setText(post.getString("hashTag"));
                 int postID = post.getInt("id");
                 RequestQueue queue = AppController.getInstance().getRequestQueue();
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Const.getPostComments(postID),null,
@@ -74,9 +76,6 @@ public class postActivity extends AppCompatActivity {
                     }
                 });
                 queue.add(request);
-                //bodyTV.setText(post.getString("BODY"));
-                //tagsTV.setText(post.getString("TAGS"));
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
