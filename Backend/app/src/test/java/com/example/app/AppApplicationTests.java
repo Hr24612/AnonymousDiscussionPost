@@ -1,10 +1,13 @@
 package com.example.app;
 
 
+import com.example.app.controller.apiControllerUser;
 import com.example.app.repo.postRepo;
 import com.example.app.controller.apiControllerPost;
 import com.example.app.model.user;
 import com.example.app.model.post;
+import com.example.app.repo.userRepo;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -19,7 +22,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @SpringBootTest
 class AppApplicationTests {
 
@@ -28,6 +30,12 @@ class AppApplicationTests {
 
 	@MockBean
 	private postRepo repo;
+
+	@MockBean
+	private userRepo userRepo;
+
+	@InjectMocks
+	private apiControllerUser apiControllerUser;
 
 	@Test
 	public void getPostsTest(){
@@ -92,10 +100,43 @@ class AppApplicationTests {
 		assertEquals(1, list.size());
 	}
 
+	//amir
+	@Test
+	public void getUsersTest(){
+		int id1= 1;
+		int id2= 2;
+		Long id1long = Long.valueOf(id1);
+		Long id2long = Long.valueOf(id2);
+		user testUser1 = new user(id1long, "test1", "test1", "test1");
+		user testUser2 = new user(id2long, "test2", "test2", "test2");
+		List<user> list = new ArrayList<user>();
+
+		list.add(testUser1);
+		list.add(testUser2);
+
+		when(userRepo.findAll()).thenReturn(list);
+
+		assertEquals(2, list.size());
+	}
+
+	//amir
+	@Test
+	public void getUserByLastName(){
+		int id1= 1;
+		int id2= 2;
+		Long id1long = Long.valueOf(id1);
+		Long id2long = Long.valueOf(id2);
+		user testUser1 = new user((long) 1,"test1", "test11", "test111");
+		user testUser2 = new user((long) 2,"test2", "test22", "test222");
+		List<user> list = new ArrayList<user>();
+		list.add(testUser1);
+		list.add(testUser2);
+
+		assertEquals("test11", list.get(0).getLastName());
+		assertEquals(2, list.size());
+	}
 	@Test
 	void contextLoads() {
 	}
-
-
 
 }
