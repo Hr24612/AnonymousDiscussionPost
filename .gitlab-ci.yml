@@ -4,8 +4,8 @@ stages:
   - mavenbuild
   - maventest
   - autodeploy
-#  - androidbuild
-#  - androidtest
+  - androidbuild
+  - androidtest
 
 # tags: "shell" should match with the tag name provided to runner, for spring runner should execute in shell.
 # Notice that in petclinic project, the spring project is in root of master, if yours is in folder then cd to that folder.
@@ -29,52 +29,6 @@ maven-test:
   artifacts:
     paths:
       - Backend/app/target/*.jar
-# Below stage builds, deploys and executes the jar as service.
-# Make sure there is /target directory in your server, else script will fail, or use any other folder you like.
-# If you are changing the folder, reflect the change in systemd-web-demo service too.
-# autoDeploy:
-#   stage: autodeploy
-#   tags:
-#    - backend_tag
-#   script:
-#     - cd Backend/app
-#     - mvn package
-#     - sudo mv target/*.jar /target/web-demo.jar 
-#     - sudo systemctl stop system-web-demo
-#     - sudo systemctl start system-web-demo
-
-    
-# To build android projects
-# Notice that we cd into Android_test folder which contains all Android files before building apk.    
-# Ensure the tag matches with the tag created for Android runner
-# Android runner should have docker as executor.
-# android-build:
-#   image: javiersantos/android-ci:latest
-#   stage: androidbuild
-#   before_script:
-#     - export GRADLE_USER_HOME=`pwd`/.gradle
-#     - chmod +x ./Android_test/gradlew
-#   tags:
-#    - android_tag1
-#   script:
-#     - cd Android_test
-#     - ./gradlew assemble
-#   artifacts:
-#     paths:
-#     - Android_test/app/build/outputs/
-    
-# To run Android unit tests.   
-# unitTests:
-#   image: javiersantos/android-ci:latest
-#   stage: androidtest
-#   before_script:
-#     - export GRADLE_USER_HOME=`pwd`/.gradle
-#     - chmod +x ./Android_test/gradlew
-#   tags:
-#    - android_tag1
-#   script:
-#     - cd Android_test
-#     - ./gradlew test
 
 # You may not want to always autodeploy every commit you send to the repository.
 # Especially if you are on an experimental branch and the feature you are
@@ -92,6 +46,7 @@ autoDeploy:
   - 10-ci-cd
   - master
   - Demo3
+  - 18-cicd-for-frontend
 #  variables:
 #  - $CI_COMMIT_MESSAGE =~ /autodeploy/
  script:
@@ -100,3 +55,35 @@ autoDeploy:
  - sudo mv target/*.jar /target/web-demo.jar
  - sudo systemctl stop system-web-demo
  - sudo systemctl start system-web-demo
+
+# To build android projects
+# Notice that we cd into Android_test folder which contains all Android files before building apk.    
+# Ensure the tag matches with the tag created for Android runner
+# Android runner should have docker as executor.
+android-build:
+  image: javiersantos/android-ci:latest
+  stage: androidbuild
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/gradlew
+  tags:
+    - android_tag
+  script:
+    - cd Frontend
+    - ./gradlew assemble
+  artifacts:
+    paths:
+    - Frontend/app/build/outputs/
+    
+# To run Android unit tests.
+unitTests:
+  image: javiersantos/android-ci:latest
+  stage: androidtest
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/gradlew
+  tags:
+    - android_tag
+  script:
+    - cd Frontend
+    - ./gradlew test

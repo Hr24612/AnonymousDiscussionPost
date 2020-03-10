@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.anti_social.net_utils.Const;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,8 +44,7 @@ public class CreateUserActivity extends AppCompatActivity {
                params.put("lastName", lastET.getText().toString());
                params.put("userName", userET.getText().toString());
 
-               //TODO move url to strings file
-               JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, "coms-309-sk-4.cs.iastate.edu:8080/api/user/createUser", new JSONObject(params),
+               JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.CREATEUSER, new JSONObject(params),
                        new Response.Listener<JSONObject>() {
                            @Override
                            public void onResponse(JSONObject response) {

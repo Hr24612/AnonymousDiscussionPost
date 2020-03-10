@@ -30,15 +30,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG = "RecyclerViewAdapter";
     private ArrayList<JSONObject> posts = new ArrayList<>();
     private Context postListContext;
+    private String userId;
 
     /**
      * A method for initializing a new RecyclerViewAdadpter.  An adapter is used for binding the items of a ViewHolder to that ViewHolder.  This specific adapter was made for rendering posts.
      * @param /postTitles This is ArrayList of all the post titles that needed to be rendered
      * @param postListContext This is the context in which the post titles are being rendered (An example would be an activity).
      */
-    public RecyclerViewAdapter(ArrayList<JSONObject> posts, Context postListContext) {
+    public RecyclerViewAdapter(ArrayList<JSONObject> posts, Context postListContext, String userId) {
         this.posts = posts;
         this.postListContext = postListContext;
+        this.userId = userId;
     }
 
     /**
@@ -92,6 +94,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 Intent postIntent = new Intent(postListContext.getApplicationContext(), postActivity.class);
                 postIntent.putExtra("postContent", posts.get(position).toString());
+                postIntent.putExtra("userId",userId);
                 postListContext.startActivity(postIntent);
                 Log.d(TAG, "you clicked on item " + position);
             }
