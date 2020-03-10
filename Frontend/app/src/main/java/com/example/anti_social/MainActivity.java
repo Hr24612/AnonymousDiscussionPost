@@ -31,22 +31,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button loginBtn = (Button) findViewById(R.id.loginBtn);
         Button createUserBtn = (Button) findViewById(R.id.createNewUserBtn);
-        TextView userFoundTV = (TextView) findViewById(R.id.userNotFoundTV);
+        final TextView userFoundTV = (TextView) findViewById(R.id.userNotFoundTV);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //TODO check if user exists
-                EditText nameET = (EditText) findViewById(R.id.nameEditText);
-                final int[] found = {0};
+                final EditText nameET = (EditText) findViewById(R.id.nameEditText);
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Const.getUserByName(nameET.getText().toString()),null,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                found[0] = 1;
                                 try {
                                     String id = response.getString("id");
+                                    userFoundTV.setText("Success welcome "+nameET.getText().toString());
+                                    Intent homePageIntent = new Intent(getApplicationContext(), homeActivity.class);
+                                    homePageIntent.putExtra("Mainactivity.id", id);
+                                    startActivity(homePageIntent);
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -55,20 +57,12 @@ public class MainActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
+                        //error.printStackTrace();
+                        userFoundTV.setText("Invalid Username");
                     }
                 });
                 queue.add(request);
 
-                if(found[0] == 1) {
-                    Intent homePageIntent = new Intent(getApplicationContext(), homeActivity.class);
-                    homePageIntent.putExtra("Mainactivity.id", nameET.getText().toString());
-                    startActivity(homePageIntent);
-                    nameET.setText("");
-                }
-                else{
-                    //TODO add user not found text
-                }
             }
         });
 

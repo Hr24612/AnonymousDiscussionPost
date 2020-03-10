@@ -46,7 +46,7 @@ public class homeActivity extends AppCompatActivity {
                         for(int i = 0; i < response.length(); i++){
                             posts.add(response.getJSONObject(i));
                         }
-                        initRecyclerView();
+                        initRecyclerView(getIntent().getStringExtra("Mainactivity.id"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -70,9 +70,9 @@ public class homeActivity extends AppCompatActivity {
         });
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView(String userId){
         RecyclerView recyclerView = findViewById(R.id.homePostViewRV);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(posts, this);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(posts, this, userId);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

@@ -10,10 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1196583d-7d45-433c-9810-d4cd88fba8c2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/layout_listitem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/layout_listitem.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/anti_social/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/anti_social/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/anti_social/RecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/anti_social/RecyclerViewAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/anti_social/homeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/anti_social/homeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/anti_social/net_utils/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/anti_social/net_utils/Const.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,17 +34,7 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Anti-Social" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
+        <projects_view />
       </state>
     </system>
   </component>
