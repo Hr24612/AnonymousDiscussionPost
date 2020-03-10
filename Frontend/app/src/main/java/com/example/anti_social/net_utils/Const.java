@@ -10,10 +10,12 @@ public class Const {
     public static final String GETALLPOSTS = "http://coms-309-sk-4.cs.iastate.edu:8080/api/post/getAllPosts";
 
     public static String getUserByName(String name){
-        return "http://coms-309-sk-4.cs.iastate.edu:8080/api/user/getUserByUserName/" + name;
-
+        return "http://coms-309-sk-4.cs.iastate.edu:8080/api/user/getUserByUserName/"+name;
     }
     public static String getPostUpvotes(int id){
         return "http://coms-309-sk-4.cs.iastate.edu:8080/api/post/"+id+"/likesByPostId";
+    }
+    public static String createPost(String id){
+        return "http://coms-309-sk-4.cs.iastate.edu:8080/api/post/"+id+"/createPost";
     }
 }

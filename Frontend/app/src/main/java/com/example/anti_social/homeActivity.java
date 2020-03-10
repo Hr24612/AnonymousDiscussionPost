@@ -26,13 +26,14 @@ import java.util.ArrayList;
 
 public class homeActivity extends AppCompatActivity {
     private ArrayList<JSONObject> posts = new ArrayList<>();
-
+    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         if(getIntent().hasExtra("Mainactivity.id")){
+            userId = getIntent().getStringExtra("Mainactivity.id");
             RecyclerView postRecyler = (RecyclerView) findViewById(R.id.homePostViewRV);
             RecyclerView.LayoutManager postLayoutManager = new LinearLayoutManager(this);
             postRecyler.setLayoutManager(postLayoutManager);
@@ -65,6 +66,7 @@ public class homeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent createPostIntent = new Intent(getApplicationContext(), CreatePostActivity.class);
+                createPostIntent.putExtra("userId", userId);
                 startActivity(createPostIntent);
             }
         });

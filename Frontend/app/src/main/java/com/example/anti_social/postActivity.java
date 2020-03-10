@@ -39,8 +39,8 @@ public class postActivity extends AppCompatActivity {
                 JSONObject post = new JSONObject(jsonString);
 
                 titleTV.setText(post.getString("title"));
-                //bodyTV.setText(post.getString("BODY"));
-                //tagsTV.setText(post.getString("TAGS"));
+                bodyTV.setText(post.getString("body"));
+                tagsTV.setText(post.getString("hashTag"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
