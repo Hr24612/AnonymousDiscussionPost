@@ -18,4 +18,7 @@ public class Const {
     public static String createPost(String id){
         return "http://coms-309-sk-4.cs.iastate.edu:8080/api/post/"+id+"/createPost";
     }
+    public static String getPostComments(int id){
+        return "http://coms-309-sk-4.cs.iastate.edu:8080/api/post/"+id+"/commentsByPostId";
+    }
 }

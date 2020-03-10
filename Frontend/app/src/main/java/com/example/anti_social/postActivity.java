@@ -5,9 +5,23 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.anti_social.app.AppController;
+import com.example.anti_social.net_utils.Const;
+import com.example.anti_social.recyclerViewAdapters.CommentRecyclerView;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Activity page for post content on the app, displays the title and body of the post as well as user comments
@@ -15,6 +29,7 @@ import org.json.JSONObject;
  */
 public class postActivity extends AppCompatActivity {
 
+    private ArrayList<String> comments = new ArrayList<>();
     // public static final String TAG = "TEST";
     //RequestQueue Queue;
 
@@ -34,39 +49,43 @@ public class postActivity extends AppCompatActivity {
 
             String jsonString = getIntent().getStringExtra("postContent");
             Log.d("postActivity", "string is " + jsonString);
-
             try {
                 JSONObject post = new JSONObject(jsonString);
-
                 titleTV.setText(post.getString("title"));
                 bodyTV.setText(post.getString("body"));
                 tagsTV.setText(post.getString("hashTag"));
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //TODO Rework for comments or as backup if no intent extra
-       /* JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Const.POSTMAN_URL,null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            for(int i = 0; i < response.length(); i++){         //TODO potential not a loop just go through json array and assign values individually
-                                JSONObject stuff = response.getJSONObject(i);   //TODO change this to be for proper format for post
-                                bodyTV.setText(stuff.getString("title"));       //TODO this as well
+                int postID = post.getInt("id");
+                RequestQueue queue = AppController.getInstance().getRequestQueue();
+                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Const.getPostComments(postID),null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                for(int i = 0; i < response.length(); i++){
+                                    try {
+                                        comments.add(response.getJSONObject(i).getString("text"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                initRecyclerView();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
+                        }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                     }
-        });
-        Queue.add(request);*/
+                });
+                queue.add(request);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.postCommentRV);
+        CommentRecyclerView adapter = new CommentRecyclerView(comments, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
