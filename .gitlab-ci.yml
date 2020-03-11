@@ -1,0 +1,89 @@
+# Stages of pipeline, should match with stage tag inside each job.
+# Each stages executes in sequence, if previous job fails, then all the preceeding jobs are skipped.
+stages:
+  - mavenbuild
+  - maventest
+  - autodeploy
+  - androidbuild
+  - androidtest
+
+# tags: "shell" should match with the tag name provided to runner, for spring runner should execute in shell.
+# Notice that in petclinic project, the spring project is in root of master, if yours is in folder then cd to that folder.
+maven-build:
+  stage: mavenbuild
+  tags:
+    - backend_tag
+  script:
+    - cd Backend/app
+    - mvn package -B
+  
+# artifacts are created when job executes successfully, and can be manually downloaded from GitLab GUI.
+# artifacts are not mandatory, buts it good practice, in case auto deploy fails, you can manually download the jar.
+maven-test:
+  stage: maventest
+  tags:
+    - backend_tag
+  script:
+    - cd Backend/app
+    - mvn test
+  artifacts:
+    paths:
+      - Backend/app/target/*.jar
+
+# You may not want to always autodeploy every commit you send to the repository.
+# Especially if you are on an experimental branch and the feature you are
+# implementing is incomplete or if the frontend is not ready for all of the changes the
+#backend has implemented. What you can do in this situation is add some conditions
+#to your yml file which will only run certain stages on a certain branch. You can also
+#add conditions to detect a certain commit message to skip/run specific stages in
+#your pipeline.
+autoDeploy:
+ stage: autodeploy
+ tags:
+ - backend_tag
+ only: # Will only run if these conditions are met, check documentation for more!
+  refs:
+  - 10-ci-cd
+  - master
+  - Demo3
+  - 18-cicd-for-frontend
+#  variables:
+#  - $CI_COMMIT_MESSAGE =~ /autodeploy/
+ script:
+ - cd Backend/app
+ - mvn package
+ - sudo mv target/*.jar /target/web-demo.jar
+ - sudo systemctl stop system-web-demo
+ - sudo systemctl start system-web-demo
+
+# To build android projects
+# Notice that we cd into Android_test folder which contains all Android files before building apk.    
+# Ensure the tag matches with the tag created for Android runner
+# Android runner should have docker as executor.
+android-build:
+  image: javiersantos/android-ci:latest
+  stage: androidbuild
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/gradlew
+  tags:
+    - android_tag
+  script:
+    - cd Frontend
+    - ./gradlew assemble
+  artifacts:
+    paths:
+    - Frontend/app/build/outputs/
+    
+# To run Android unit tests.
+unitTests:
+  image: javiersantos/android-ci:latest
+  stage: androidtest
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/gradlew
+  tags:
+    - android_tag
+  script:
+    - cd Frontend
+    - ./gradlew test

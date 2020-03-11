@@ -1,80 +1,125 @@
 package com.example.app.controller;
 
-import com.example.app.model.Post;
+import com.example.app.exception.ResourceNotFoundException;
+import com.example.app.exception.UserNotFoundException;
+import com.example.app.model.post;
 import com.example.app.repo.postRepo;
+import com.example.app.repo.userRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * API class for managing posts
+ */
 @RestController
-@RequestMapping("/postApi")
+@RequestMapping("/api/post")
 public class apiControllerPost {
 
+    //Reference to postRepo interface
     @Autowired
     postRepo postRepo;
 
+    //Reference to postRepo interface
+    @Autowired
+     userRepo userRepo;
 
-    @PostMapping("/createPost")
-    public Post createPost(@Valid @RequestBody Post post){
-        return postRepo.save(post);
-    }
+    //*****************//
 
-//    //TODO: Need to add functionality to receive post
-//    //TODO: Test with post man
-//    @GetMapping("/getPost")
-//    public void getPost(){
-//
-//    }
-//    //TODO: Add function to get all posts
-//    //TODO: Test with post man
+    /*******************/
+    /**** GET POSTS ****/
+    /*******************/
+
+    //Get all posts from
     @GetMapping("/getAllPosts")
-    public List<Post> getAllPosts(){
-        List<Post> allPosts = postRepo.findAll();
-        return allPosts;
+    public List<post> getPosts(){
+        return postRepo.findAll();
     }
-//
-//    //TODO: Add function to get all posts by
-//    //TODO: Test with post man
-//    @GetMapping("/getPostsByHashtag")
-//    public void getPostsByHashtag(@RequestParam("hashtag") String hashtag){
-//        //Post allPosts = new Post("","","",hashtag,0,0);
-//
-//        //help
-//        //for(Post cust: postRepo.findByHashtag(hashtag)){
-//            //allPosts += cust.toPost();
-//        //}
-//    }
-//
-//    //will NOT be implemented by demo2
-//    //TODO: Add function to get posts by new
-//    //TODO: Test with post man
-//    @GetMapping("/getPostByNew")
-//    public void getPostByNew(){
-//
-//    }
-//
-//    //will NOT be implemented by demo2
-//    //TODO: Add function to get posts by highest score
-//    //TODO: Test with post man
-//    @GetMapping("/getPostsByHighestScore")
-//    public void getPostsByHighestScore(){
-//
-//    }
-//
-//    //TODO: Add function to delete a post
-//    //TODO: Test with post man
-//    @DeleteMapping("/deletePost")
-//    public void deletePost(){
-//
-//    }
-//
-//    //TODO: Create a function to update a post (probably only going to let them update the body of the post?)
-//    //TODO: Test with post man
-//    @PutMapping("/updatePost")
-//    public void updatePost(){
-//
-//    }
+
+    //Get all posts from specific user
+    @GetMapping("/{userId}/posts")
+    public List<post> getAllPosts(@PathVariable (value = "userId") Long userId){
+        return postRepo.findByUserId(userId);
+    }
+
+
+    /*******************/
+    /** END GET POSTS **/
+    /*******************/
+
+    //*****************//
+
+    /*******************/
+    /**** POST POSTS ***/
+    /*******************/
+
+    //Create a post as userId
+    @PostMapping("/{userId}/createPost")
+    public post createPost(@PathVariable (value = "userId") Long userId, @Valid @RequestBody post post) throws UserNotFoundException {
+        return userRepo.findById(userId).map(user -> {
+            post.setUser(user);
+            return postRepo.save(post);
+        }).orElseThrow(() -> new UserNotFoundException(userId));
+
+    }
+
+    /********************/
+    /** END POST POSTS **/
+    /********************/
+
+    //*****************//
+
+    /*******************/
+    /**** PUT POSTS ****/
+    /*******************/
+
+    //Update post with userId
+    @PutMapping("{userId}/updatePost/{postId}")
+    public post updatePostById(@PathVariable (value="userId") Long userId,
+                               @PathVariable (value = "postId") Long postId,
+                               @Valid @RequestBody post post) throws UserNotFoundException {
+        if(!userRepo.existsById(userId)){
+            throw new UserNotFoundException(userId);
+        }
+        return postRepo.findById(postId).map(Post -> {
+            Post.setBody(post.getBody());
+            Post.setHashTag(post.getHashTag());
+            return postRepo.save(Post);
+        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));
+    }
+
+
+    /********************/
+    /** END PUT POSTS ***/
+    /********************/
+
+    //*****************//
+
+    /*******************/
+    /** DELETE POSTS ***/
+    /*******************/
+
+    //Delete post with userId
+    @DeleteMapping("{userId}/deletePost/{postId}")
+    public ResponseEntity<?> deletePostByUserId(@PathVariable (value = "userId") Long userId, @PathVariable (value = "postId") Long postId) throws UserNotFoundException {
+        if(!userRepo.existsById(userId)){
+            throw new UserNotFoundException(userId);
+        }
+        return postRepo.findById(postId).map(post -> {
+            postRepo.delete(post);
+            return ResponseEntity.ok().body("Deleted");
+        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));
+    }
+
+
+    /**********************/
+    /** END DELETE POSTS **/
+    /**********************/
+
+    //*****************//
+
+
 
 }

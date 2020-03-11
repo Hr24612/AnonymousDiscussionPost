@@ -5,15 +5,23 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.anti_social.app.AppController;
 import com.example.anti_social.net_utils.Const;
+import com.example.anti_social.recyclerViewAdapters.CommentRecyclerView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Activity page for post content on the app, displays the title and body of the post as well as user comments
@@ -21,33 +29,64 @@ import com.example.anti_social.net_utils.Const;
  */
 public class postActivity extends AppCompatActivity {
 
-    public static final String TAG = "TEST";
-    RequestQueue Queue;
+    private ArrayList<String> comments = new ArrayList<>();
+    // public static final String TAG = "TEST";
+    //RequestQueue Queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        final TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
-        Queue = Volley.newRequestQueue(postActivity.this);
+       // Queue = Volley.newRequestQueue(postActivity.this);
 
-        StringRequest strReq = new StringRequest(Request.Method.GET, Const.POSTMAN_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "SERVER RESPONSE: " + response);
+        if(getIntent().hasExtra("postContent")){
 
-                bodyTV.setText(response);
+            TextView titleTV = (TextView) findViewById(R.id.titleTV);
+            TextView bodyTV = (TextView) findViewById(R.id.bodyTV);
+            TextView tagsTV = (TextView) findViewById(R.id.tagsTV);
+            //EditText commentET = (EditText) findViewById(R.id.commentET); //TODO change to recycler view stuff
+
+            String jsonString = getIntent().getStringExtra("postContent");
+            Log.d("postActivity", "string is " + jsonString);
+            try {
+                JSONObject post = new JSONObject(jsonString);
+                titleTV.setText(post.getString("title"));
+                bodyTV.setText(post.getString("body"));
+                tagsTV.setText(post.getString("hashTag"));
+                int postID = post.getInt("id");
+                RequestQueue queue = AppController.getInstance().getRequestQueue();
+                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Const.getPostComments(postID),null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                for(int i = 0; i < response.length(); i++){
+                                    try {
+                                        comments.add(response.getJSONObject(i).getString("text"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                initRecyclerView();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+                queue.add(request);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                bodyTV.setText(error.getMessage());
-            }
-        });
-
-        Queue.add(strReq);
+        }
     }
+
+    private void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.postCommentRV);
+        CommentRecyclerView adapter = new CommentRecyclerView(comments, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
 }
