@@ -15,7 +15,7 @@ public class randomTest {
     JSONObject fakePost;
 
     //@Spy
-    postActivity p;
+    PostActivity p;
 
     @Test
     public void testLogin() {//throws JSONException {

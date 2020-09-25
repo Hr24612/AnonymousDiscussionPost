@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @RestController
 public class apiWelcome {
-
+    /**
+     * This is a API testing method. If it returns correctly, the API is
+     * correctly deployed.
+     */
     //Welcome message
     @GetMapping
     public String welcome() {

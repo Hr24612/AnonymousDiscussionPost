@@ -8,6 +8,7 @@ import com.example.app.repo.userRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class apiControllerPost {
 
     //Reference to postRepo interface
     @Autowired
-     userRepo userRepo;
+    userRepo userRepo;
 
     //*****************//
 
@@ -32,15 +33,24 @@ public class apiControllerPost {
     /**** GET POSTS ****/
     /*******************/
 
-    //Get all posts from
+    /**
+     * Get all posts from database
+     *
+     * @return all of the posts from the database
+     */
     @GetMapping("/getAllPosts")
-    public List<post> getPosts(){
+    public List<post> getPosts() {
         return postRepo.findAll();
     }
 
-    //Get all posts from specific user
+    /**
+     * Get all posts from specific user
+     *
+     * @param userId
+     * @return All posts from specific user
+     */
     @GetMapping("/{userId}/posts")
-    public List<post> getAllPosts(@PathVariable (value = "userId") Long userId){
+    public List<post> getAllPosts(@PathVariable(value = "userId") Long userId) {
         return postRepo.findByUserId(userId);
     }
 
@@ -55,9 +65,16 @@ public class apiControllerPost {
     /**** POST POSTS ***/
     /*******************/
 
-    //Create a post as userId
+    /**
+     * Create a post as userId
+     *
+     * @param userId
+     * @param post
+     * @return Create a post and store it in database
+     * @throws UserNotFoundException
+     */
     @PostMapping("/{userId}/createPost")
-    public post createPost(@PathVariable (value = "userId") Long userId, @Valid @RequestBody post post) throws UserNotFoundException {
+    public post createPost(@PathVariable(value = "userId") Long userId, @Valid @RequestBody post post) throws UserNotFoundException {
         return userRepo.findById(userId).map(user -> {
             post.setUser(user);
             return postRepo.save(post);
@@ -75,12 +92,20 @@ public class apiControllerPost {
     /**** PUT POSTS ****/
     /*******************/
 
-    //Update post with userId
+    /**
+     * Update post with userId
+     *
+     * @param userId
+     * @param postId
+     * @param post
+     * @return Post is updated in database
+     * @throws UserNotFoundException
+     */
     @PutMapping("{userId}/updatePost/{postId}")
-    public post updatePostById(@PathVariable (value="userId") Long userId,
-                               @PathVariable (value = "postId") Long postId,
+    public post updatePostById(@PathVariable(value = "userId") Long userId,
+                               @PathVariable(value = "postId") Long postId,
                                @Valid @RequestBody post post) throws UserNotFoundException {
-        if(!userRepo.existsById(userId)){
+        if (!userRepo.existsById(userId)) {
             throw new UserNotFoundException(userId);
         }
         return postRepo.findById(postId).map(Post -> {
@@ -101,10 +126,17 @@ public class apiControllerPost {
     /** DELETE POSTS ***/
     /*******************/
 
-    //Delete post with userId
+    /**
+     * Delete post with userId
+     *
+     * @param userId
+     * @param postId
+     * @return Post is deleted from database
+     * @throws UserNotFoundException
+     */
     @DeleteMapping("{userId}/deletePost/{postId}")
-    public ResponseEntity<?> deletePostByUserId(@PathVariable (value = "userId") Long userId, @PathVariable (value = "postId") Long postId) throws UserNotFoundException {
-        if(!userRepo.existsById(userId)){
+    public ResponseEntity<?> deletePostByUserId(@PathVariable(value = "userId") Long userId, @PathVariable(value = "postId") Long postId) throws UserNotFoundException {
+        if (!userRepo.existsById(userId)) {
             throw new UserNotFoundException(userId);
         }
         return postRepo.findById(postId).map(post -> {
@@ -119,7 +151,6 @@ public class apiControllerPost {
     /**********************/
 
     //*****************//
-
 
 
 }

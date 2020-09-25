@@ -14,8 +14,8 @@ public class CompareTest {
         JSONObject one = mock(JSONObject.class);
         JSONObject two = mock(JSONObject.class);
         JSONObjectDateCompare test = new JSONObjectDateCompare();
-        when(one.getInt("updatedAt")).thenReturn(1);
-        when(two.getInt("updatedAt")).thenReturn(2);
-        assertEquals(-1, test.compare(one, two));
+        when(one.getString("updatedAt")).thenReturn("2020-03-04T15:34:59");
+        when(two.getString("updatedAt")).thenReturn("2020-03-09T21:24:27");
+        assertEquals(1, test.compare(one, two));
     }
 }

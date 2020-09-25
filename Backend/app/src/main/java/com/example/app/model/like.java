@@ -1,13 +1,15 @@
 package com.example.app.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Class that represents a like
+ * Like class
  */
 @Entity
 @Table(name = "likes")
@@ -34,14 +36,15 @@ public class like implements Serializable {
     private user user;
 
     //Constructor to initialize DB columns
-    public like(user user, post post, Long id){
+    public like(user user, post post, Long id) {
         this.user = user;
         this.post = post;
         this.id = id;
     }
 
     //Empty constructor to help with GET requests
-    public like(){}
+    public like() {
+    }
 
     //*****************//
 
@@ -49,12 +52,29 @@ public class like implements Serializable {
     /** Getters and Setters **/
     /*************************/
 
-    public user getUser(){ return user;}
-    public void setUser(user user){ this.user = user;}
-    public post getPost(){ return post;}
-    public void setPost(post post){ this.post = post;}
-    public Long getId(){ return id;}
-    public void setId(Long id){ this.id = id;}
+    public user getUser() {
+        return user;
+    }
+
+    public void setUser(user user) {
+        this.user = user;
+    }
+
+    public post getPost() {
+        return post;
+    }
+
+    public void setPost(post post) {
+        this.post = post;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /*****************************/
     /** END Getters and Setters **/

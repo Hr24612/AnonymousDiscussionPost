@@ -3,7 +3,10 @@ package com.example.anti_social.comparators;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 
 /**
  * A class to be used to help sort the array of posts served to the end user.
@@ -11,18 +14,16 @@ import java.util.Comparator;
 public class JSONObjectDateCompare implements Comparator<JSONObject> {
     @Override
     public int compare(JSONObject first, JSONObject second){
-        int firstDate = 0, secondDate = 0;
+        Date firstDate, secondDate;
         try {
-            firstDate = first.getInt("updatedAt");
-            secondDate = second.getInt("updatedAt");
-        } catch (JSONException e) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
+            firstDate = sdf.parse(first.getString("updatedAt").replaceAll("T"," "));
+            secondDate = sdf.parse(second.getString("updatedAt").replaceAll("T"," "));
+            System.out.print("First Date: "+firstDate+"\nSecond Date: "+secondDate);
+            return secondDate.compareTo(firstDate);
+        } catch (JSONException | ParseException e) {
             e.printStackTrace();
         }
-        if(firstDate == secondDate){
-            return 0;
-        }
-        else{
-            return (firstDate > secondDate) ? 1 : -1;
-        }
+        return -2;
     }
 }

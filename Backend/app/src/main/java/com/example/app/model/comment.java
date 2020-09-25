@@ -1,17 +1,19 @@
 package com.example.app.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Class that represents a comment
+ * Comment class
  */
 
 @Entity
 @Table(name = "comment")
-public class comment extends audit{
+public class comment extends audit {
 
     //DB column to save comment id
     @Id
@@ -38,7 +40,7 @@ public class comment extends audit{
     private user user;
 
     //Constructor to initialize the DB columns
-    public comment(Long id, String text, post post, user user){
+    public comment(Long id, String text, post post, user user) {
         this.id = id;
         this.text = text;
         this.post = post;
@@ -46,7 +48,8 @@ public class comment extends audit{
     }
 
     //Empty constructor to help with GET requests
-    public comment(){ }
+    public comment() {
+    }
 
     //*****************//
 
@@ -54,14 +57,37 @@ public class comment extends audit{
     /** Getters and Setters **/
     /*************************/
 
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-    public String getText() {return text;}
-    public void setText(String text) {this.text = text;}
-    public post getPost() {return post;}
-    public void setPost(post post) {this.post = post;}
-    public user getUser() {return user;}
-    public void setUser(user user) {this.user = user;}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public post getPost() {
+        return post;
+    }
+
+    public void setPost(post post) {
+        this.post = post;
+    }
+
+    public user getUser() {
+        return user;
+    }
+
+    public void setUser(user user) {
+        this.user = user;
+    }
 
     /*****************************/
     /** END Getters and Setters **/

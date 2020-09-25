@@ -1,13 +1,15 @@
 package com.example.app.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Class that represents a post
+ * Post class
  */
 
 @Entity
@@ -40,7 +42,7 @@ public class post extends audit {
     private user user;
 
     //Constructor1 to initialize DB columns
-    public post(Long id, String hashTag, String body, String title, user user){
+    public post(Long id, String hashTag, String body, String title, user user) {
         this.id = id;
         this.hashTag = hashTag;
         this.title = title;
@@ -49,7 +51,8 @@ public class post extends audit {
     }
 
     //Empty constructor to help with GET requests
-    public post() { }
+    public post() {
+    }
 
     //*****************//
 
@@ -57,16 +60,45 @@ public class post extends audit {
     /** Getters and Setters **/
     /*************************/
 
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-    public String getHashTag() {return hashTag;}
-    public void setHashTag(String hashTag) {this.hashTag = hashTag; }
-    public String getTitle() {return title;}
-    public void setTitle(String title){this.title = title;}
-    public String getBody() {return body;}
-    public void setBody(String body) {this.body = body; }
-    public user getUser() { return user; }
-    public void setUser(user user) { this.user = user; }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getHashTag() {
+        return hashTag;
+    }
+
+    public void setHashTag(String hashTag) {
+        this.hashTag = hashTag;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public user getUser() {
+        return user;
+    }
+
+    public void setUser(user user) {
+        this.user = user;
+    }
 
     /*****************************/
     /** END Getters and Setters **/

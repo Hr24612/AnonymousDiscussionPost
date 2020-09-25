@@ -6,11 +6,14 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Response" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="response" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1196583d-7d45-433c-9810-d4cd88fba8c2" name="Default Changelist" comment="" />
+    <list default="true" id="1196583d-7d45-433c-9810-d4cd88fba8c2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,15 +32,42 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/..">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Anti-Social" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Anti-Social" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Anti-Social" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="android" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="JUnit4 Test Class" />
+        <option value="layoutResourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -53,7 +83,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Groovy JUnit" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/com/example/anti_social/comparators" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../test_oAuth/app" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -69,6 +99,9 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.anti_social" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -82,42 +115,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.Frontend-app">
-    <configuration name="ComparatorTest.testCompare" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sk_4-Frontend-app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.anti_social.comparators.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.anti_social.comparators" />
-      <option name="MAIN_CLASS_NAME" value="com.example.anti_social.comparators.ComparatorTest" />
-      <option name="METHOD_NAME" value="testCompare" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ComparatorTests.testCompare" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sk_4-Frontend-app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.anti_social.comparators.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.anti_social.comparators" />
-      <option name="MAIN_CLASS_NAME" value="com.example.anti_social.comparators.ComparatorTests" />
-      <option name="METHOD_NAME" value="testCompare" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CompareTest.testCompare" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Android App.sk_4-Frontend-app">
+    <configuration name="CompareTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <module name="sk_4-Frontend-app" />
       <extension name="coverage">
         <pattern>
@@ -127,14 +126,46 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.example.anti_social.comparators" />
       <option name="MAIN_CLASS_NAME" value="com.example.anti_social.comparators.CompareTest" />
-      <option name="METHOD_NAME" value="testCompare" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HomePresenterTests" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sk_4-Frontend-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.anti_social.Home.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.anti_social" />
+      <option name="MAIN_CLASS_NAME" value="com.example.anti_social.HomePresenterTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HomePresenterTests.test_grabHashtag" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sk_4-Frontend-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.anti_social.Home.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.anti_social" />
+      <option name="MAIN_CLASS_NAME" value="com.example.anti_social.HomePresenterTests" />
+      <option name="METHOD_NAME" value="test_grabHashtag" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ExampleUnitTest.addition_isCorrect" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HomePresenterTests.test_hashTagModelResponse" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <module name="sk_4-Frontend-app" />
       <extension name="coverage">
         <pattern>
@@ -143,8 +174,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.anti_social" />
-      <option name="MAIN_CLASS_NAME" value="com.example.anti_social.ExampleUnitTest" />
-      <option name="METHOD_NAME" value="addition_isCorrect" />
+      <option name="MAIN_CLASS_NAME" value="com.example.anti_social.HomePresenterTests" />
+      <option name="METHOD_NAME" value="test_hashTagModelResponse" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
@@ -153,6 +184,23 @@
     </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="trivialTest.trivialFuncTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sk_4-Frontend-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.anti_social.Home.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.anti_social" />
+      <option name="MAIN_CLASS_NAME" value="com.example.anti_social.trivialTest" />
+      <option name="METHOD_NAME" value="trivialFuncTest" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
@@ -311,32 +359,13 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencies" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Android JUnit.CompareTest.testCompare" />
-        <item itemvalue="Android JUnit.ComparatorTest.testCompare" />
-        <item itemvalue="Gradle.app [dependencies]" />
-        <item itemvalue="Android JUnit.ComparatorTests.testCompare" />
-        <item itemvalue="Android JUnit.ExampleUnitTest.addition_isCorrect" />
+        <item itemvalue="Android JUnit.HomePresenterTests.test_hashTagModelResponse" />
+        <item itemvalue="Android JUnit.HomePresenterTests" />
+        <item itemvalue="Android JUnit.HomePresenterTests.test_grabHashtag" />
+        <item itemvalue="Android JUnit.CompareTest" />
+        <item itemvalue="Android JUnit.trivialTest.trivialFuncTest" />
       </list>
     </recent_temporary>
   </component>
